@@ -75,7 +75,7 @@ public class ProdutoDAO {
     }
     
     //retorna lista com todos os produtos cadastrados
-    public List<Produto> findAllProduto(String descricao) throws SQLException{
+    public List<Produto> findAllProduto() throws SQLException{
         String sqlQuery = "SELECT artigo, preco, qtde_produto, descricao FROM produto";
         PreparedStatement statment = connection.prepareStatement(sqlQuery);
         ResultSet result = statment.executeQuery();
