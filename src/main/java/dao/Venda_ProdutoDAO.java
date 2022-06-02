@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.sql.StatementEvent;
 import model.Produto;
 import model.Venda_Produto;
 
@@ -20,7 +21,7 @@ public class Venda_ProdutoDAO {
     }
     
     //retorna todas as Venda_Produto de um nf
-    public List<Venda_Produto> getVenda_Produto(int nf) throws SQLException{
+    public List<Venda_Produto> findVenda_Produto(int nf) throws SQLException{
         String sqlQuery = "SELECT produto.*, venda_produto.* "
                 + "        FROM venda_produto JOIN produto ON produto.artigo = venda_produto.cod_produto"
                 + "        WHERE venda_produto.nf = ?;"; 
@@ -37,6 +38,20 @@ public class Venda_ProdutoDAO {
         }
         connection.close();
         return vendas;
+    }
+    
+    public boolean insertVenda_Produto(List<Venda_Produto> produtosVendidos, long nf) throws SQLException{
+        for (Venda_Produto produtoVendido: produtosVendidos){
+            String sql = "INSERT INTO venda_produto VALUES (?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setLong(1, nf); //notaFiscal
+            statement.setInt(2, produtoVendido.getProduto().getArtigo()); //codProduto
+            statement.setInt(3, produtoVendido.getQuantidade()); //qtdeVendida
+            statement.setDouble(4, produtoVendido.getPreco_venda()); //precoVenda
+            if (statement.executeUpdate() == 0)
+                return false;
+        }
+        return true;
     }
     
 }

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Cliente;
@@ -28,7 +29,7 @@ public class CompraDAO {
             return new Compra(result.getInt(1), //nf
                               result.getInt(2), //compra 
                               new Cliente(result.getInt(4), result.getString(5), result.getInt(6)),
-                              new Venda_ProdutoDAO().getVenda_Produto(nf)
+                              new Venda_ProdutoDAO().findVenda_Produto(nf)
                              );         
         }else{
             return null;
@@ -46,7 +47,7 @@ public class CompraDAO {
             compras.add(new Compra(result.getInt(1), //nf
                               result.getInt(2), //compra 
                               new Cliente(result.getInt(4), result.getString(5), result.getInt(6)),
-                              new Venda_ProdutoDAO().getVenda_Produto(result.getInt(1))
+                              new Venda_ProdutoDAO().findVenda_Produto(result.getInt(1))
                             )
             );         
         }
@@ -63,11 +64,30 @@ public class CompraDAO {
             compras.add(new Compra(result.getInt(1), //nf
                               result.getInt(2), //compra 
                               new Cliente(result.getInt(4), result.getString(5), result.getInt(6)),
-                              new Venda_ProdutoDAO().getVenda_Produto(result.getInt(1))
+                              new Venda_ProdutoDAO().findVenda_Produto(result.getInt(1))
                             )
             );         
         }
         return compras;
+    }
+    
+    //insere uma compra no banco de dados
+    public boolean insertCompra(Compra compra) throws SQLException{
+        String sql = "INSERT INTO compra VALUES (null, ?, ?)";
+        PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        statement.setInt(1, compra.getDataCompra());
+        statement.setInt(2, compra.getCliente().getCpf());
+        int rowsInserted = statement.executeUpdate();    
+        
+        if (rowsInserted > 0){
+            ResultSet keys = statement.getGeneratedKeys();
+            if (keys.next()){
+                if (new Venda_ProdutoDAO().insertVenda_Produto(compra.getProdutos(), keys.getLong(1)))
+                    return true;
+            }
+        }
+        return false;
+        
     }
     
 }
