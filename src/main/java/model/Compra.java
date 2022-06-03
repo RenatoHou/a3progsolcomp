@@ -1,9 +1,7 @@
 package model;
 
-import dao.ProdutoDAO;
 import dao.Venda_ProdutoDAO;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +18,6 @@ public class Compra {
     public Compra(int dataCompra, Cliente cliente) {
         this.dataCompra = dataCompra;
         this.cliente = cliente;
-        this.produtos = new ArrayList<>();
     }
 
     public Compra(int notaFiscal, int dataCompra, Cliente cliente, List<Venda_Produto> produtos) {
@@ -32,9 +29,7 @@ public class Compra {
     }
 
     
-    public void addProduto(Produto produto, int quantidade ){
-        produtos.add(new Venda_Produto(produto, quantidade));
-    }
+
     
     
     
