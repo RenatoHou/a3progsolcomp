@@ -17,7 +17,7 @@ public class Connexao_SQL {
         connection = DriverManager.getConnection(url_bd, username, password);
         System.out.println("Conexão deu tudo certo :) ");
         return connection;
-               
+        
     }
     
     public static void close() throws SQLException{

@@ -119,7 +119,7 @@ public class Login extends javax.swing.JFrame {
             ClienteDAO clienteDAO = new ClienteDAO();
             cliente = clienteDAO.findClienteByEmail(campoEmail.getText());
             clienteDAO.close();
-            if (cliente.getSenha() == campoSenha.getText()){
+            if (cliente.getSenha().equals(campoSenha.getText())){
                 Home window = new Home();
                 window.setVisible(true);
                 this.setVisible(false);
