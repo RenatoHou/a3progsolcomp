@@ -1,12 +1,9 @@
 package model;
 
-import dao.ProdutoDAO;
-import dao.Venda_ProdutoDAO;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 
 public class Compra {
@@ -28,7 +25,6 @@ public class Compra {
         this.dataCompra = dataCompra;
         this.cliente = cliente;
         this.produtos = produtos;
-        this.valorTotal = valorTotal;
     }
 
     

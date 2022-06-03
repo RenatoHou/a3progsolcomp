@@ -1,13 +1,24 @@
-
 package model;
 
 
 public class Cliente {
-    private int cpf;
+    private String cpf;
     private String nome;
     private int idade;
+    private String email;
+    private String senha;
 
-    public Cliente(int cpf, String nome, int idade) {
+    public Cliente(String cpf, String nome, int idade, String email, String senha) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.idade = idade;
+        this.email = email;
+        this.senha = senha;
+    }
+
+    
+    
+    public Cliente(String cpf, String nome, int idade) {
         this.cpf = cpf;
         this.nome = nome;
         this.idade = idade;
@@ -18,7 +29,7 @@ public class Cliente {
         this.idade = idade;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
@@ -30,7 +41,7 @@ public class Cliente {
         return idade;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -40,6 +51,22 @@ public class Cliente {
 
     public void setIdade(int idade) {
         this.idade = idade;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
     
     

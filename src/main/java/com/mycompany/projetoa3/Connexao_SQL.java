@@ -20,4 +20,8 @@ public class Connexao_SQL {
                
     }
     
+    public static void close() throws SQLException{
+        getConnection().close();
+    } 
+    
 }
