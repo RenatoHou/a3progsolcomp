@@ -8,6 +8,8 @@ import com.mycompany.projetoa3.Connexao_SQL;
 import com.mysql.cj.xdevapi.Client;
 import dao.ClienteDAO;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.time.Year;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -41,16 +43,43 @@ public class Cadastro extends javax.swing.JFrame {
         botaoCadastrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        campoCpf = new javax.swing.JTextField();
-        campoIdade = new javax.swing.JTextField();
+        campoIdade = new javax.swing.JFormattedTextField();
+        campoCpf = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         campoNome.setText("Nome");
+        campoNome.setToolTipText("Nome");
+        campoNome.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                campoNomeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoNomeFocusLost(evt);
+            }
+        });
 
         campoSenha.setText("Senha");
+        campoSenha.setToolTipText("Senha");
+        campoSenha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                campoSenhaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoSenhaFocusLost(evt);
+            }
+        });
 
         campoEmail.setText("Email");
+        campoEmail.setToolTipText("Email");
+        campoEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                campoEmailFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoEmailFocusLost(evt);
+            }
+        });
 
         botaoCadastrar.setText("Cadastrar");
         botaoCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -65,15 +94,28 @@ public class Cadastro extends javax.swing.JFrame {
 
         jLabel2.setText("jLabel2");
 
-        campoCpf.setText("CPF");
-        campoCpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoCpfActionPerformed(evt);
+        campoIdade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        campoIdade.setText("Ano de nascimento");
+        campoIdade.setToolTipText("Ano de nascimento");
+        campoIdade.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                campoIdadeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoIdadeFocusLost(evt);
             }
         });
 
-        campoIdade.setText("Idade");
-        campoIdade.setToolTipText("");
+        campoCpf.setText("CPF");
+        campoCpf.setToolTipText("CPF");
+        campoCpf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                campoCpfFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoCpfFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,8 +131,8 @@ public class Cadastro extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(campoSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                     .addComponent(campoEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(campoCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addComponent(campoIdade))
+                    .addComponent(campoIdade)
+                    .addComponent(campoCpf))
                 .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
@@ -100,7 +142,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addComponent(campoCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(campoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -120,19 +162,27 @@ public class Cadastro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void campoCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCpfActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoCpfActionPerformed
-
     private void botaoCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCadastrarActionPerformed
-        String nome = campoNome.getText();
-        String cpf = campoCpf.getText();
-        String email = campoEmail.getText();
-        String senha = campoSenha.getText();
+//        String nome = campoNome.getText();
+//        String cpf = campoCpf.getText();
+//        String email = campoEmail.getText();
+//        String senha = campoSenha.getText();
 
         try {
+            
+            String nome = campoNome.getText();
+            String cpf = campoCpf.getText();
+            String email = campoEmail.getText();
+            String senha = campoSenha.getText();
+            if (nome.isBlank() || cpf.equals("   .   .   -  " ) || email.isBlank() || senha.isBlank())
+                throw new NullPointerException();
             int idade = Integer.parseInt(campoIdade.getText());
-            Cliente cliente = new Cliente(cpf, nome, idade, email, senha);
+            //esse programa só aceita cadastro de pessoas com idades entre 11 e 99 anos.
+            if (idade < 10){
+                throw new NumberFormatException();
+            }
+            int ano = Year.now().getValue() - idade;
+            Cliente cliente = new Cliente(cpf, nome, ano, email, senha);
             ClienteDAO clienteDAO = new ClienteDAO();
             clienteDAO.insertCliente(cliente);
             clienteDAO.close();
@@ -141,10 +191,83 @@ public class Cadastro extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NumberFormatException nf) {
-            JOptionPane.showMessageDialog(null, "Idade deve ser um número.");
+            JOptionPane.showMessageDialog(null, "Ano de nascimento inválido.");
+        } catch (NullPointerException np) {
+            JOptionPane.showMessageDialog(null, "Dados inválidos.");      
         }
 
     }//GEN-LAST:event_botaoCadastrarActionPerformed
+
+    private void campoIdadeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoIdadeFocusGained
+        if (campoIdade.getText().equals("Idade")){
+            campoIdade.setText("");        
+            try {
+                campoIdade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##")));
+            } catch (java.text.ParseException ex) {
+                System.out.println("Erro setando ano");
+                Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_campoIdadeFocusGained
+
+    private void campoSenhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoSenhaFocusGained
+        if (campoSenha.getText().equals("Senha"))
+            campoSenha.setText("");
+    }//GEN-LAST:event_campoSenhaFocusGained
+
+    private void campoEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoEmailFocusGained
+        if (campoEmail.getText().equals("Email"))
+        campoEmail.setText("");
+    }//GEN-LAST:event_campoEmailFocusGained
+
+    private void campoCpfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoCpfFocusGained
+        if (campoCpf.getText().equals("CPF")){                
+            try {
+                System.out.println(campoCpf.getFormatter());
+                campoCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            } catch (ParseException ex) {
+                System.out.println("Erro novo formato");
+                Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            campoCpf.setText("");
+        }
+    }//GEN-LAST:event_campoCpfFocusGained
+
+    private void campoNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoNomeFocusGained
+        if (campoNome.getText().equals("Nome"))
+            campoNome.setText("");
+    }//GEN-LAST:event_campoNomeFocusGained
+
+    private void campoNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoNomeFocusLost
+        if (campoNome.getText().equals(""))
+            campoNome.setText("Nome");
+    }//GEN-LAST:event_campoNomeFocusLost
+
+    private void campoCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoCpfFocusLost
+        if (campoCpf.getText().equals("   .   .   -  ")){
+            campoCpf.setFormatterFactory(null);
+            campoCpf.setText("CPF");        
+            
+        }
+    }//GEN-LAST:event_campoCpfFocusLost
+
+    private void campoEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoEmailFocusLost
+        if (campoEmail.getText().equals(""))
+            campoEmail.setText("Email");
+    }//GEN-LAST:event_campoEmailFocusLost
+
+    private void campoSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoSenhaFocusLost
+        if (campoSenha.getText().equals(""))
+            campoSenha.setText("Senha");
+    }//GEN-LAST:event_campoSenhaFocusLost
+
+    private void campoIdadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoIdadeFocusLost
+        if (campoIdade.getText().equals("    ")){
+            campoIdade.setFormatterFactory(null);
+            campoIdade.setText("Ano de nascimento");        
+            
+        }
+    }//GEN-LAST:event_campoIdadeFocusLost
 
     /**
      * @param args the command line arguments
@@ -184,9 +307,9 @@ public class Cadastro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCadastrar;
-    private javax.swing.JTextField campoCpf;
+    private javax.swing.JFormattedTextField campoCpf;
     private javax.swing.JTextField campoEmail;
-    private javax.swing.JTextField campoIdade;
+    private javax.swing.JFormattedTextField campoIdade;
     private javax.swing.JTextField campoNome;
     private javax.swing.JTextField campoSenha;
     private javax.swing.JLabel jLabel1;

@@ -15,7 +15,6 @@ public class Connexao_SQL {
         Connection connection = null;
         
         connection = DriverManager.getConnection(url_bd, username, password);
-        System.out.println("Conexão deu tudo certo :) ");
         return connection;
         
     }
