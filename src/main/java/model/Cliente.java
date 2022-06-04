@@ -7,7 +7,20 @@ public class Cliente {
     private int idade;
     private String email;
     private String senha;
+    private boolean isAdmin;
 
+    
+    //todos os dados do cliente
+    public Cliente(String cpf, String nome, int idade, String email, String senha, boolean isAdmin) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.idade = idade;
+        this.email = email;
+        this.senha = senha;
+        this.isAdmin = isAdmin;
+    }
+
+    //cliente cadastro
     public Cliente(String cpf, String nome, int idade, String email, String senha) {
         this.cpf = cpf;
         this.nome = nome;
@@ -16,18 +29,6 @@ public class Cliente {
         this.senha = senha;
     }
 
-    
-    
-    public Cliente(String cpf, String nome, int idade) {
-        this.cpf = cpf;
-        this.nome = nome;
-        this.idade = idade;
-    }
-
-    public Cliente(String nome, int idade) {
-        this.nome = nome;
-        this.idade = idade;
-    }
 
     public String getCpf() {
         return cpf;
@@ -67,6 +68,10 @@ public class Cliente {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
     }
     
     

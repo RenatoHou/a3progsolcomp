@@ -42,6 +42,7 @@ public class Venda_ProdutoDAO {
     
     public boolean insertVenda_Produto(List<Venda_Produto> produtosVendidos, long nf) throws SQLException{
         for (Venda_Produto produtoVendido: produtosVendidos){
+            //insere na tabela Venda_Produto
             String sql = "INSERT INTO venda_produto VALUES (?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setLong(1, nf); //notaFiscal
@@ -50,8 +51,18 @@ public class Venda_ProdutoDAO {
             statement.setDouble(4, produtoVendido.getPreco_venda()); //precoVenda
             if (statement.executeUpdate() == 0)
                 return false;
+            
+            //diminuir estoque
+            produtoVendido.getProduto().diminuirQuantidade(produtoVendido.getQuantidade());
+            ProdutoDAO produtoDAO = new ProdutoDAO();           
+            produtoDAO.updateProduto(produtoVendido.getProduto());
+            
         }
         return true;
+    }
+    
+    public void close() throws SQLException{
+        connection.close();
     }
     
 }

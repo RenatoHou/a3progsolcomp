@@ -15,10 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Cliente;
 
-/**
- *
- * @author gvj20
- */
+
 public class Cadastro extends javax.swing.JFrame {
 
     /**
@@ -187,7 +184,7 @@ public class Cadastro extends javax.swing.JFrame {
             clienteDAO.insertCliente(cliente);
             clienteDAO.close();
             JOptionPane.showMessageDialog(null, "Cadastro realizado");
-            this.setVisible(false);
+            this.dispose();
         } catch (SQLException ex) {
             Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NumberFormatException nf) {

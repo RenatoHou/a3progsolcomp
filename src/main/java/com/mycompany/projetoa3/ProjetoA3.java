@@ -11,8 +11,9 @@ import userinteface.ManterClientes;
 public class ProjetoA3 {
 
     public static void main(String[] args) throws SQLException {
-        HomeV2 window = new HomeV2();
-        window.setVisible(true);
+        Session.setSession(new Login());
+        Session.newSession();
+ 
         
       
     }

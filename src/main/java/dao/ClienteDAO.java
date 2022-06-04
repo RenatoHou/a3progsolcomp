@@ -33,12 +33,12 @@ public class ClienteDAO {
     
     //encontra cliente por cpf (chave primaria)
     public Cliente findClienteByCpf(String cpf) throws SQLException{
-        String sqlQuery = "SELECT cpf, nome, nascimento, email, senha FROM cliente where cpf = ?";
+        String sqlQuery = "SELECT cpf, nome, nascimento, email, senha, admin FROM cliente where cpf = ?";
         PreparedStatement statment = connection.prepareStatement(sqlQuery);
         statment.setString(1, cpf);
         ResultSet result = statment.executeQuery();
         if (result.next()){
-            return new Cliente(result.getString(1), result.getString(2), Year.now().getValue() - result.getInt(3), result.getString(4), result.getString(5));
+            return new Cliente(result.getString(1), result.getString(2), Year.now().getValue() - result.getInt(3), result.getString(4), result.getString(5), result.getBoolean(6));
         }else{
             return null;
         }
@@ -52,18 +52,18 @@ public class ClienteDAO {
         ResultSet result = statment.executeQuery();
         List<Cliente> listaClientes = new ArrayList<>();
         while (result.next()){
-            listaClientes.add( new Cliente(result.getString(1), result.getString(2), Year.now().getValue() -  result.getInt(3), result.getString(4), result.getString(5)));
+            listaClientes.add( new Cliente(result.getString(1), result.getString(2), Year.now().getValue() -  result.getInt(3), result.getString(4), result.getString(5), result.getBoolean(6)));
         }
         return listaClientes;
     }
     
     public Cliente findClienteByEmail(String email) throws SQLException{
-        String sqlQuery = "SELECT cpf, nome, nascimento, email, senha FROM cliente where email = ?";
+        String sqlQuery = "SELECT cpf, nome, nascimento, email, senha, admin FROM cliente where email = ?";
         PreparedStatement statment = connection.prepareStatement(sqlQuery);
         statment.setString(1, email);
         ResultSet result = statment.executeQuery();
         if (result.next()){
-            return new Cliente(result.getString(1), result.getString(2), Year.now().getValue() - result.getInt(3), result.getString(4), result.getString(5));
+            return new Cliente(result.getString(1), result.getString(2), Year.now().getValue() - result.getInt(3), result.getString(4), result.getString(5), result.getBoolean(6));
         }else{
             return null;
         }
@@ -75,7 +75,7 @@ public class ClienteDAO {
         ResultSet result = statment.executeQuery();
         List<Cliente> listaClientes = new ArrayList<>();
         while (result.next()){
-            listaClientes.add( new Cliente(result.getString(1), result.getString(2), Year.now().getValue() -  result.getInt(3), result.getString(4), result.getString(5)));
+            listaClientes.add( new Cliente(result.getString(1), result.getString(2), Year.now().getValue() -  result.getInt(3), result.getString(4), result.getString(5), result.getBoolean(6)));
         }
         return listaClientes;
     }

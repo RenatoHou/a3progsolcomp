@@ -8,19 +8,19 @@ import java.util.List;
 
 public class Compra {
     private int notaFiscal;
-    private int dataCompra;
+    private java.sql.Date dataCompra;
     private Cliente cliente;
     private List<Venda_Produto> produtos;
     private double valorTotal;
 
     //nova compra
-    public Compra(int dataCompra, Cliente cliente) {
+    public Compra(java.sql.Date dataCompra, Cliente cliente) {
         this.dataCompra = dataCompra;
         this.cliente = cliente;
         this.produtos = new ArrayList<>();
     }
 
-    public Compra(int notaFiscal, int dataCompra, Cliente cliente, List<Venda_Produto> produtos) {
+    public Compra(int notaFiscal, java.sql.Date dataCompra, Cliente cliente, List<Venda_Produto> produtos) {
         this.notaFiscal = notaFiscal;
         this.dataCompra = dataCompra;
         this.cliente = cliente;
@@ -32,14 +32,16 @@ public class Compra {
         produtos.add(new Venda_Produto(produto, quantidade));
     }
     
-    
+    public void removeProduto(Produto produto){
+        produtos.removeIf(x -> x.getProduto().equals(produto));
+    }
     
 
     public int getNotaFiscal() {
         return notaFiscal;
     }
 
-    public int getDataCompra() {
+    public java.sql.Date getDataCompra() {
         return dataCompra;
     }
 
@@ -55,7 +57,7 @@ public class Compra {
         this.notaFiscal = notaFiscal;
     }
 
-    public void setDataCompra(int dataCompra) {
+    public void setDataCompra(java.sql.Date dataCompra) {
         this.dataCompra = dataCompra;
     }
 

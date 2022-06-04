@@ -27,8 +27,8 @@ public class CompraDAO {
         ResultSet result = statment.executeQuery();
         if (result.next()){
             return new Compra(result.getInt(1), //nf
-                              result.getInt(2), //compra 
-                              new Cliente(result.getString(4), result.getString(5), result.getInt(6)),
+                              result.getDate(2), //compra 
+                              new Cliente(result.getString(4), result.getString(5), result.getInt(6), result.getString(7), result.getString(8)),
                               new Venda_ProdutoDAO().findVenda_Produto(nf)
                              );         
         }else{
@@ -45,8 +45,8 @@ public class CompraDAO {
         List<Compra> compras = new ArrayList<>();
         while (result.next()){
             compras.add(new Compra(result.getInt(1), //nf
-                              result.getInt(2), //compra 
-                              new Cliente(result.getString(4), result.getString(5), result.getInt(6)),
+                              result.getDate(2), //compra 
+                              new Cliente(result.getString(4), result.getString(5), result.getInt(6), result.getString(7), result.getString(8)),
                               new Venda_ProdutoDAO().findVenda_Produto(result.getInt(1))
                             )
             );         
@@ -62,8 +62,8 @@ public class CompraDAO {
         List<Compra> compras = new ArrayList<>();
         while (result.next()){
             compras.add(new Compra(result.getInt(1), //nf
-                              result.getInt(2), //compra 
-                              new Cliente(result.getString(4), result.getString(5), result.getInt(6)),
+                              result.getDate(2), //compra 
+                              new Cliente(result.getString(4), result.getString(5), result.getInt(6), result.getString(7), result.getString(8)),
                               new Venda_ProdutoDAO().findVenda_Produto(result.getInt(1))
                             )
             );         
@@ -75,7 +75,7 @@ public class CompraDAO {
     public boolean insertCompra(Compra compra) throws SQLException{
         String sql = "INSERT INTO compra VALUES (null, ?, ?)";
         PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        statement.setInt(1, compra.getDataCompra());
+        statement.setDate(1, compra.getDataCompra());
         statement.setString(2, compra.getCliente().getCpf());
         int rowsInserted = statement.executeUpdate();    
         

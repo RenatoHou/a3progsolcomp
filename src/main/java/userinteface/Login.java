@@ -4,6 +4,7 @@
  */
 package userinteface;
 
+import com.mycompany.projetoa3.Session;
 import dao.ClienteDAO;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -11,10 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Cliente;
 
-/**
- *
- * @author gvj20
- */
+
 public class Login extends javax.swing.JFrame {
 
     /**
@@ -120,8 +118,7 @@ public class Login extends javax.swing.JFrame {
             cliente = clienteDAO.findClienteByEmail(campoEmail.getText());
             clienteDAO.close();
             if (cliente.getSenha().equals(campoSenha.getText())){
-                Home window = new Home();
-                window.setVisible(true);
+                Session.startSession(cliente);
                 this.setVisible(false);
             }else{
                 JOptionPane.showMessageDialog(null, "Senha incorreta.");
@@ -177,4 +174,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
+
+    public void limparSenha(){
+        campoSenha.setText("");
+    }
 }

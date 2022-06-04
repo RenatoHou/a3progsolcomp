@@ -58,9 +58,13 @@ public class Produto {
         return categoria;
     }
     
-    
-    
-    
-    
+    public void diminuirQuantidade(int quantidade){
+        qtde_produto -= quantidade;
+    }
     
 }
+    
+    
+    
+    
+
