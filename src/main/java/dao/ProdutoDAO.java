@@ -19,11 +19,12 @@ public class ProdutoDAO {
     
     //insere um produto no banco de dados
     public boolean insertProduto(Produto produto) throws SQLException{
-        String sqlQuery = "INSERT INTO produto (preco, qtde_produto, descricao) VALUES (?,?,?)";
+        String sqlQuery = "INSERT INTO produto (preco, qtde_produto, descricao, categoria) VALUES (?,?,?,?)";
         PreparedStatement statment = connection.prepareStatement(sqlQuery);
         statment.setDouble(1, produto.getPreco());
         statment.setInt(2, produto.getQtde_produto());
         statment.setString(3, produto.getDescricao());
+        statment.setString(4, produto.getCategoria());
         int rowsInserted = statment.executeUpdate();      
         return (rowsInserted > 0);
     }
@@ -51,37 +52,37 @@ public class ProdutoDAO {
     
     //encontra produto por artigo (id)
     public Produto findProduto(int artigo) throws SQLException{
-        String sqlQuery = "SELECT artigo, preco, qtde_produto, descricao FROM produto WHERE artigo = ?";
+        String sqlQuery = "SELECT artigo, preco, qtde_produto, descricao, categoria FROM produto WHERE artigo = ?";
         PreparedStatement statment = connection.prepareStatement(sqlQuery);
         statment.setInt(1, artigo);
         ResultSet result = statment.executeQuery();
         if (result.next())
-            return new Produto(result.getInt(1), result.getDouble(2), result.getInt(3), result.getString(4));
+            return new Produto(result.getInt(1), result.getDouble(2), result.getInt(3), result.getString(4), result.getString(5));
         else
             return null;
     }
     
     //retorna lista com todos os produtos com certa descricao
     public List<Produto> findProdutoByDescricao(String descricao) throws SQLException{
-        String sqlQuery = "SELECT artigo, preco, qtde_produto, descricao FROM produto WHERE descricao LIKE ?";
+        String sqlQuery = "SELECT artigo, preco, qtde_produto, descricao, categoria FROM produto WHERE descricao LIKE ?";
         PreparedStatement statment = connection.prepareStatement(sqlQuery);
         statment.setString(1, "%" + descricao + "%");
         ResultSet result = statment.executeQuery();
         List<Produto> produtos = new ArrayList<>();
         while (result.next()){
-            produtos.add(new Produto(result.getInt(1), result.getDouble(2), result.getInt(3), result.getString(4)));
+            produtos.add(new Produto(result.getInt(1), result.getDouble(2), result.getInt(3), result.getString(4), result.getString(5)));
         }       
         return produtos;
     }
     
     //retorna lista com todos os produtos cadastrados
     public List<Produto> findAllProduto() throws SQLException{
-        String sqlQuery = "SELECT artigo, preco, qtde_produto, descricao FROM produto";
+        String sqlQuery = "SELECT artigo, preco, qtde_produto, descricao, categoria FROM produto";
         PreparedStatement statment = connection.prepareStatement(sqlQuery);
         ResultSet result = statment.executeQuery();
         List<Produto> produtos = new ArrayList<>();
         while (result.next()){
-            produtos.add(new Produto(result.getInt(1), result.getDouble(2), result.getInt(3), result.getString(4)));
+            produtos.add(new Produto(result.getInt(1), result.getDouble(2), result.getInt(3), result.getString(4), result.getString(5)));
         }       
         return produtos;
     }

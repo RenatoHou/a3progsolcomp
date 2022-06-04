@@ -43,6 +43,9 @@ public class HomeV2 extends javax.swing.JFrame {
         painelMasculino = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         painelMasculinoCenter = new javax.swing.JPanel();
+        painelFeminino = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        painelFemininoCenter = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setExtendedState(6);
@@ -89,10 +92,25 @@ public class HomeV2 extends javax.swing.JFrame {
         jLabel1.setToolTipText("");
         painelMasculino.add(jLabel1, java.awt.BorderLayout.NORTH);
 
+        painelMasculinoCenter.setOpaque(false);
         painelMasculinoCenter.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 12, 12));
         painelMasculino.add(painelMasculinoCenter, java.awt.BorderLayout.CENTER);
 
         jTabbedPane2.addTab("Masculino", painelMasculino);
+
+        painelFeminino.setBackground(new java.awt.Color(0, 102, 102));
+        painelFeminino.setLayout(new java.awt.BorderLayout());
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel2.setText("Os melhores");
+        jLabel2.setToolTipText("");
+        painelFeminino.add(jLabel2, java.awt.BorderLayout.NORTH);
+
+        painelFemininoCenter.setOpaque(false);
+        painelFemininoCenter.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 12, 12));
+        painelFeminino.add(painelFemininoCenter, java.awt.BorderLayout.CENTER);
+
+        jTabbedPane2.addTab("Feminino", painelFeminino);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,8 +165,11 @@ public class HomeV2 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JPanel painelFeminino;
+    private javax.swing.JPanel painelFemininoCenter;
     private javax.swing.JPanel painelHome;
     private javax.swing.JPanel painelMasculino;
     private javax.swing.JPanel painelMasculinoCenter;
@@ -222,7 +243,13 @@ public class HomeV2 extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         painelProtudo.add(botaoComprarProduto, gridBagConstraints);
-        painelMasculinoCenter.add(painelProtudo);
+        
+        if (produto.getCategoria().equals("masculino"))
+            painelMasculinoCenter.add(painelProtudo);
+        else if (produto.getCategoria().equals("feminino"))
+            painelFemininoCenter.add(painelProtudo);
+        else
+            System.out.println("Produto sem categoria");
         
         
 

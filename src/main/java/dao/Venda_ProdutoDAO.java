@@ -31,10 +31,10 @@ public class Venda_ProdutoDAO {
         ResultSet result = statment.executeQuery();
         List<Venda_Produto> vendas = new ArrayList<>();
         while (result.next()){
-            vendas.add(new Venda_Produto(new Produto(result.getInt(1), result.getDouble(2), result.getInt(3), result.getString(4)), //produto
-                       result.getInt(5), //notaFiscal
-                       result.getInt(7), //quantidade
-                       result.getDouble(7))); //valorDoItem
+            vendas.add(new Venda_Produto(new Produto(result.getInt(1), result.getDouble(2), result.getInt(3), result.getString(4), result.getString(5)), //produto
+                       result.getInt(6), //notaFiscal
+                       result.getInt(8), //quantidade
+                       result.getDouble(9))); //valorDoItem
         }
         connection.close();
         return vendas;
