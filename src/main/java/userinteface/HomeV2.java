@@ -54,6 +54,12 @@ public class HomeV2 extends javax.swing.JFrame {
         painelFeminino = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         painelFemininoCenter = new javax.swing.JPanel();
+        painelAcessorios = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        painelAcessoriosCenter = new javax.swing.JPanel();
+        painelOutros = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        painelOutrosCenter = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         labelTotalFinal = new javax.swing.JLabel();
@@ -145,6 +151,34 @@ public class HomeV2 extends javax.swing.JFrame {
         painelFeminino.add(painelFemininoCenter, java.awt.BorderLayout.CENTER);
 
         jTabbedPane2.addTab("Feminino", painelFeminino);
+
+        painelAcessorios.setBackground(new java.awt.Color(0, 102, 102));
+        painelAcessorios.setLayout(new java.awt.BorderLayout());
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel3.setText("Os melhores");
+        jLabel3.setToolTipText("");
+        painelAcessorios.add(jLabel3, java.awt.BorderLayout.NORTH);
+
+        painelAcessoriosCenter.setOpaque(false);
+        painelAcessoriosCenter.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 12, 12));
+        painelAcessorios.add(painelAcessoriosCenter, java.awt.BorderLayout.CENTER);
+
+        jTabbedPane2.addTab("Acessórios", painelAcessorios);
+
+        painelOutros.setBackground(new java.awt.Color(0, 102, 102));
+        painelOutros.setLayout(new java.awt.BorderLayout());
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel4.setText("Os melhores");
+        jLabel4.setToolTipText("");
+        painelOutros.add(jLabel4, java.awt.BorderLayout.NORTH);
+
+        painelOutrosCenter.setOpaque(false);
+        painelOutrosCenter.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 12, 12));
+        painelOutros.add(painelOutrosCenter, java.awt.BorderLayout.CENTER);
+
+        jTabbedPane2.addTab("Outros", painelOutros);
 
         getContentPane().add(jTabbedPane2, java.awt.BorderLayout.CENTER);
 
@@ -338,6 +372,8 @@ public class HomeV2 extends javax.swing.JFrame {
     private javax.swing.JButton botaoFecharPedido;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -353,12 +389,16 @@ public class HomeV2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuRelatorioProdutos;
     private javax.swing.JMenu menuRelatorios;
     private javax.swing.JMenuItem menuRelatoriosVendas;
+    private javax.swing.JPanel painelAcessorios;
+    private javax.swing.JPanel painelAcessoriosCenter;
     private javax.swing.JPanel painelCarrinho;
     private javax.swing.JPanel painelFeminino;
     private javax.swing.JPanel painelFemininoCenter;
     private javax.swing.JPanel painelHome;
     private javax.swing.JPanel painelMasculino;
     private javax.swing.JPanel painelMasculinoCenter;
+    private javax.swing.JPanel painelOutros;
+    private javax.swing.JPanel painelOutrosCenter;
     // End of variables declaration//GEN-END:variables
 
 
@@ -422,11 +462,15 @@ public class HomeV2 extends javax.swing.JFrame {
         botaoComprarProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         botaoComprarProduto.setForeground(new java.awt.Color(0, 0, 0));
         botaoComprarProduto.setText("Comprar");
-        botaoComprarProduto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adicionarAoCarrinho(produto);
-            }
-        });
+        if (produto.getQtde_produto() == 0){
+            botaoComprarProduto.setEnabled(false);
+        }else{
+            botaoComprarProduto.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    adicionarAoCarrinho(produto);
+                }
+            });
+        }
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -436,9 +480,10 @@ public class HomeV2 extends javax.swing.JFrame {
             painelMasculinoCenter.add(painelProtudo);
         else if (produto.getCategoria().equals("feminino"))
             painelFemininoCenter.add(painelProtudo);
+        else if (produto.getCategoria().equals("acessorios"))
+            painelAcessoriosCenter.add(painelProtudo);
         else
-            System.out.println("Produto sem categoria");
-        
+            painelOutrosCenter.add(painelProtudo);
         
 
     }
