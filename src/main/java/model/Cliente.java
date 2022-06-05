@@ -8,16 +8,18 @@ public class Cliente {
     private String email;
     private String senha;
     private boolean isAdmin;
+    private boolean isSuperAdmin;
 
     
     //todos os dados do cliente
-    public Cliente(String cpf, String nome, int idade, String email, String senha, boolean isAdmin) {
+    public Cliente(String cpf, String nome, int idade, String email, String senha, boolean isAdmin, boolean isSuperAdmin) {
         this.cpf = cpf;
         this.nome = nome;
         this.idade = idade;
         this.email = email;
         this.senha = senha;
         this.isAdmin = isAdmin;
+        this.isSuperAdmin = isSuperAdmin;
     }
 
     //cliente cadastro
@@ -27,6 +29,14 @@ public class Cliente {
         this.idade = idade;
         this.email = email;
         this.senha = senha;
+    }
+    
+    //cliente info basicas
+    public Cliente(String cpf, String nome, int idade, String email) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.idade = idade;
+        this.email = email;;
     }
 
 
@@ -73,6 +83,12 @@ public class Cliente {
     public boolean isAdmin() {
         return isAdmin;
     }
+
+    public boolean isSuperAdmin() {
+        return isSuperAdmin;
+    }
+    
+    
     
     
     

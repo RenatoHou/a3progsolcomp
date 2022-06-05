@@ -48,6 +48,10 @@ public final class Session {
         return user.isAdmin();
     }
     
+    public static boolean isSuperAdmin() {
+        return user.isSuperAdmin();
+    }
+    
     public static void adicionarAoCarrinho(Produto produto, int quantidade){
         carrinho.addProduto(produto, quantidade);
     }

@@ -24,6 +24,15 @@ public class HomeV2 extends javax.swing.JFrame {
      */
     public HomeV2() {
         initComponents();
+        if (!Session.isSuperAdmin()){
+            menuGerenciarFuncionarios.setVisible(false);
+            menuGerenciarProdutos.setVisible(false);
+        }
+        if (!Session.isAdmin()){
+            menuGerenciar.setVisible(false);
+            menuRelatorios.setVisible(false);
+        }
+        
         carregaProdutos();
     }
 
@@ -50,6 +59,16 @@ public class HomeV2 extends javax.swing.JFrame {
         labelTotalFinal = new javax.swing.JLabel();
         botaoFecharPedido = new javax.swing.JButton();
         painelCarrinho = new javax.swing.JPanel();
+        menu = new javax.swing.JMenuBar();
+        menuPerfil = new javax.swing.JMenu();
+        menuPerfilEditar = new javax.swing.JMenuItem();
+        menuGerenciar = new javax.swing.JMenu();
+        menuGerenciarClientes = new javax.swing.JMenuItem();
+        menuGerenciarFuncionarios = new javax.swing.JMenuItem();
+        menuGerenciarProdutos = new javax.swing.JMenuItem();
+        menuRelatorios = new javax.swing.JMenu();
+        menuRelatoriosVendas = new javax.swing.JMenuItem();
+        menuRelatorioProdutos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(0, 102, 102));
@@ -165,6 +184,68 @@ public class HomeV2 extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.WEST);
 
+        menuPerfil.setText("Perfil");
+
+        menuPerfilEditar.setText("Editar");
+        menuPerfilEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPerfilEditarActionPerformed(evt);
+            }
+        });
+        menuPerfil.add(menuPerfilEditar);
+
+        menu.add(menuPerfil);
+
+        menuGerenciar.setText("Gerenciar");
+
+        menuGerenciarClientes.setText("Clientes");
+        menuGerenciarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuGerenciarClientesActionPerformed(evt);
+            }
+        });
+        menuGerenciar.add(menuGerenciarClientes);
+
+        menuGerenciarFuncionarios.setText("Funcionários");
+        menuGerenciarFuncionarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuGerenciarFuncionariosActionPerformed(evt);
+            }
+        });
+        menuGerenciar.add(menuGerenciarFuncionarios);
+
+        menuGerenciarProdutos.setText("Produtos");
+        menuGerenciarProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuGerenciarProdutosActionPerformed(evt);
+            }
+        });
+        menuGerenciar.add(menuGerenciarProdutos);
+
+        menu.add(menuGerenciar);
+
+        menuRelatorios.setText("Relatórios");
+
+        menuRelatoriosVendas.setText("Vendas");
+        menuRelatoriosVendas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRelatoriosVendasActionPerformed(evt);
+            }
+        });
+        menuRelatorios.add(menuRelatoriosVendas);
+
+        menuRelatorioProdutos.setText("Produtos");
+        menuRelatorioProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRelatorioProdutosActionPerformed(evt);
+            }
+        });
+        menuRelatorios.add(menuRelatorioProdutos);
+
+        menu.add(menuRelatorios);
+
+        setJMenuBar(menu);
+
         setSize(new java.awt.Dimension(849, 518));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -187,6 +268,35 @@ public class HomeV2 extends javax.swing.JFrame {
         Session.newSession();
         this.dispose();
     }//GEN-LAST:event_botaoFecharPedidoActionPerformed
+
+    private void menuGerenciarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGerenciarClientesActionPerformed
+        ManterCadastros window = new ManterCadastros(false);
+        window.setVisible(true);
+    }//GEN-LAST:event_menuGerenciarClientesActionPerformed
+
+    private void menuGerenciarFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGerenciarFuncionariosActionPerformed
+        ManterCadastros window = new ManterCadastros(true);
+        window.setVisible(true);
+    }//GEN-LAST:event_menuGerenciarFuncionariosActionPerformed
+
+    private void menuPerfilEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPerfilEditarActionPerformed
+        Perfil window = new Perfil(Session.getUser());
+        window.setVisible(true);
+    }//GEN-LAST:event_menuPerfilEditarActionPerformed
+
+    private void menuRelatorioProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRelatorioProdutosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuRelatorioProdutosActionPerformed
+
+    private void menuGerenciarProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGerenciarProdutosActionPerformed
+        ManterProdutos window = new ManterProdutos();
+        window.setVisible(true);
+    }//GEN-LAST:event_menuGerenciarProdutosActionPerformed
+
+    private void menuRelatoriosVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRelatoriosVendasActionPerformed
+        RelatorioVendas window = new RelatorioVendas();
+        window.setVisible(true);
+    }//GEN-LAST:event_menuRelatoriosVendasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,6 +343,16 @@ public class HomeV2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel labelTotalFinal;
+    private javax.swing.JMenuBar menu;
+    private javax.swing.JMenu menuGerenciar;
+    private javax.swing.JMenuItem menuGerenciarClientes;
+    private javax.swing.JMenuItem menuGerenciarFuncionarios;
+    private javax.swing.JMenuItem menuGerenciarProdutos;
+    private javax.swing.JMenu menuPerfil;
+    private javax.swing.JMenuItem menuPerfilEditar;
+    private javax.swing.JMenuItem menuRelatorioProdutos;
+    private javax.swing.JMenu menuRelatorios;
+    private javax.swing.JMenuItem menuRelatoriosVendas;
     private javax.swing.JPanel painelCarrinho;
     private javax.swing.JPanel painelFeminino;
     private javax.swing.JPanel painelFemininoCenter;
@@ -248,7 +368,7 @@ public class HomeV2 extends javax.swing.JFrame {
             for (Produto produto: produtoDao.findAllProduto()){
                 addProduto(produto);
             }
-            produtoDao.Close();
+            produtoDao.close();
         } catch (SQLException ex) {
             Logger.getLogger(HomeV2.class.getName()).log(Level.SEVERE, null, ex);
         }

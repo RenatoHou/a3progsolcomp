@@ -7,6 +7,7 @@ public class Venda_Produto {
     private int quantidade;
     private double preco_venda;
     private double total;
+    
 
     public Venda_Produto(Produto produto, int notaFiscal, int quantidade, double preco_venda) {
         this.produto = produto;

@@ -16,11 +16,14 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public Produto(double preco, int qtde_produto, String descricao) {
+    public Produto(double preco, int qtde_produto, String descricao, String categoria) {
         this.preco = preco;
         this.qtde_produto = qtde_produto;
         this.descricao = descricao;
+        this.categoria = categoria;
     }
+
+    
 
     public int getArtigo() {
         return artigo;

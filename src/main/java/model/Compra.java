@@ -11,7 +11,8 @@ public class Compra {
     private java.sql.Date dataCompra;
     private Cliente cliente;
     private List<Venda_Produto> produtos;
-    private double valorTotal;
+    private double valorTotal = 0.0;
+    private String estado = "Processamento";
 
     //nova compra
     public Compra(java.sql.Date dataCompra, Cliente cliente) {
@@ -20,11 +21,15 @@ public class Compra {
         this.produtos = new ArrayList<>();
     }
 
-    public Compra(int notaFiscal, java.sql.Date dataCompra, Cliente cliente, List<Venda_Produto> produtos) {
+    public Compra(int notaFiscal, java.sql.Date dataCompra, Cliente cliente, List<Venda_Produto> produtos, String estado) {
         this.notaFiscal = notaFiscal;
         this.dataCompra = dataCompra;
         this.cliente = cliente;
         this.produtos = produtos;
+        for (Venda_Produto produtoVendido: produtos){
+            valorTotal += produtoVendido.getTotal();
+        }
+        this.estado = estado;
     }
 
     
@@ -67,6 +72,14 @@ public class Compra {
 
     public void setProdutos(List<Venda_Produto> produtos) {
         this.produtos = produtos;
+    }
+
+    public double getValorTotal() {
+        return valorTotal;
+    }
+
+    public String getEstado() {
+        return estado;
     }
     
     

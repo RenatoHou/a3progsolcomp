@@ -6,6 +6,7 @@ package userinteface;
 
 import com.mycompany.projetoa3.Session;
 import dao.ClienteDAO;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,6 +58,14 @@ public class Login extends javax.swing.JFrame {
         });
 
         campoEmail.setText("Email");
+        campoEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                campoEmailFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoEmailFocusLost(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Wazee");
@@ -65,6 +74,11 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setText("Olá, Bem-vindo...");
 
         campoSenha.setText("jPasswordField1");
+        campoSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                campoSenhaKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,24 +126,23 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoCadastrarActionPerformed
 
     private void botaoEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEntrarActionPerformed
-        try {
-            Cliente cliente;
-            ClienteDAO clienteDAO = new ClienteDAO();
-            cliente = clienteDAO.findClienteByEmail(campoEmail.getText());
-            clienteDAO.close();
-            if (cliente.getSenha().equals(campoSenha.getText())){
-                Session.startSession(cliente);
-                this.setVisible(false);
-            }else{
-                JOptionPane.showMessageDialog(null, "Senha incorreta.");
-            }
-            
-        }catch (NullPointerException ex){
-            JOptionPane.showMessageDialog(null, "Usuário incorreto.");
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        entrar();
     }//GEN-LAST:event_botaoEntrarActionPerformed
+
+    private void campoEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoEmailFocusGained
+        if (campoEmail.getText().equals("Email"))
+            campoEmail.setText("");
+    }//GEN-LAST:event_campoEmailFocusGained
+
+    private void campoEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoEmailFocusLost
+        if (campoEmail.getText().equals(""))
+            campoEmail.setText("Email");
+    }//GEN-LAST:event_campoEmailFocusLost
+
+    private void campoSenhaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoSenhaKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+            entrar();
+    }//GEN-LAST:event_campoSenhaKeyReleased
 
     /**
      * @param args the command line arguments
@@ -177,5 +190,25 @@ public class Login extends javax.swing.JFrame {
 
     public void limparSenha(){
         campoSenha.setText("");
+    }
+    
+    private void entrar(){
+        try {
+            Cliente cliente;
+            ClienteDAO clienteDAO = new ClienteDAO();
+            cliente = clienteDAO.findClienteByEmail(campoEmail.getText());
+            clienteDAO.close();
+            if (cliente.getSenha().equals(campoSenha.getText())){
+                Session.startSession(cliente);
+                this.setVisible(false);
+            }else{
+                JOptionPane.showMessageDialog(null, "Senha incorreta.");
+            }
+            
+        }catch (NullPointerException ex){
+            JOptionPane.showMessageDialog(null, "Usuário incorreto.");
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
