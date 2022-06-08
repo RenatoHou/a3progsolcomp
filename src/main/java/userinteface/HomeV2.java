@@ -70,6 +70,7 @@ public class HomeV2 extends javax.swing.JFrame {
         menuPerfilEditar = new javax.swing.JMenuItem();
         menuGerenciar = new javax.swing.JMenu();
         menuGerenciarClientes = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         menuGerenciarFuncionarios = new javax.swing.JMenuItem();
         menuGerenciarProdutos = new javax.swing.JMenuItem();
         menuRelatorios = new javax.swing.JMenu();
@@ -240,6 +241,9 @@ public class HomeV2 extends javax.swing.JFrame {
         });
         menuGerenciar.add(menuGerenciarClientes);
 
+        jMenuItem1.setText("Vendas");
+        menuGerenciar.add(jMenuItem1);
+
         menuGerenciarFuncionarios.setText("Funcionários");
         menuGerenciarFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -374,6 +378,7 @@ public class HomeV2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -480,7 +485,7 @@ public class HomeV2 extends javax.swing.JFrame {
             painelMasculinoCenter.add(painelProtudo);
         else if (produto.getCategoria().equals("feminino"))
             painelFemininoCenter.add(painelProtudo);
-        else if (produto.getCategoria().equals("acessorios"))
+        else if (produto.getCategoria().equals("acessorio"))
             painelAcessoriosCenter.add(painelProtudo);
         else
             painelOutrosCenter.add(painelProtudo);

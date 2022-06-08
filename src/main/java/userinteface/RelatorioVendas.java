@@ -60,6 +60,9 @@ public class RelatorioVendas extends javax.swing.JFrame {
         tabelaVendasPorEstado = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(500, 350));
+        setPreferredSize(new java.awt.Dimension(600, 450));
+        setSize(new java.awt.Dimension(600, 400));
 
         painelTodas.setLayout(new java.awt.BorderLayout());
 

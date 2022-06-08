@@ -20,7 +20,7 @@ public class ClienteDAO {
     
     //insere cliente ou funcionario no banco de dados
     private boolean insertCliente(Cliente cliente, boolean admin) throws SQLException{
-        String sqlQuery = "INSERT INTO cliente (cpf, nome, nascimento, email, senha, admin) VALUES (?,?,?,?,?,?)";
+        String sqlQuery = "INSERT INTO cliente (cpf, nome, nascimento, email, senha, isadmin) VALUES (?,?,?,?,?,?)";
         PreparedStatement statment = connection.prepareStatement(sqlQuery);
         statment.setString(1, cliente.getCpf());
         statment.setString(2, cliente.getNome());
@@ -40,7 +40,7 @@ public class ClienteDAO {
     
     //encontra cliente por cpf (chave primaria)
     public Cliente findClienteByCpf(String cpf) throws SQLException{
-        String sqlQuery = "SELECT cpf, nome, nascimento, email, senha, isadmin, issuperadmin FROM cliente where cpf = ? AND admin = FALSE";
+        String sqlQuery = "SELECT cpf, nome, nascimento, email, senha, isadmin, issuperadmin FROM cliente where cpf = ? AND isadmin = FALSE";
         PreparedStatement statment = connection.prepareStatement(sqlQuery);
         statment.setString(1, cpf);
         ResultSet result = statment.executeQuery();
@@ -53,7 +53,7 @@ public class ClienteDAO {
     
     //encontra todos os clientes com certo nome
     public List<Cliente> findClienteByName(String nome) throws SQLException{
-        String sqlQuery = "SELECT cpf, nome, nascimento, email, senha FROM cliente where nome = ? AND admin = FALSE";
+        String sqlQuery = "SELECT cpf, nome, nascimento, email, senha FROM cliente where nome = ? AND isadmin = FALSE";
         PreparedStatement statment = connection.prepareStatement(sqlQuery);
         statment.setString(1, nome);
         ResultSet result = statment.executeQuery();

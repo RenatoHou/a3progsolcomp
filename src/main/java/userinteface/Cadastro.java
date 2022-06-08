@@ -92,7 +92,7 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel2.setText("jLabel2");
 
         campoIdade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        campoIdade.setText("Ano de nascimento");
+        campoIdade.setText("Idade");
         campoIdade.setToolTipText("Ano de nascimento");
         campoIdade.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -261,7 +261,7 @@ public class Cadastro extends javax.swing.JFrame {
     private void campoIdadeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoIdadeFocusLost
         if (campoIdade.getText().equals("    ")){
             campoIdade.setFormatterFactory(null);
-            campoIdade.setText("Ano de nascimento");        
+            campoIdade.setText("Idade");        
             
         }
     }//GEN-LAST:event_campoIdadeFocusLost

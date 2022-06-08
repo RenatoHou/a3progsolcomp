@@ -71,7 +71,7 @@ public class ManterProdutos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Artigo", "Descrição", "Categoria", "Preço", "Estoque"
+                "Artigo", "Descrição", "Categoria", "Estoque", "Preço"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -265,7 +265,7 @@ public class ManterProdutos extends javax.swing.JFrame {
         campoDescricao.setText(tableModel.getValueAt(selectedRow, 1).toString());
         campoCategoria.setText(tableModel.getValueAt(selectedRow, 2).toString());
         campoQuantidade.setText(tableModel.getValueAt(selectedRow, 3).toString());
-        campoPreco.setText(tableModel.getValueAt(selectedRow, 4).toString());
+        campoPreco.setText(tableModel.getValueAt(selectedRow, 4).toString().replace("R$", ""));
         botaoRemover.setEnabled(true);
         botaoEditar.setEnabled(true);
     }//GEN-LAST:event_tabelaClientesMouseClicked
@@ -278,6 +278,7 @@ public class ManterProdutos extends javax.swing.JFrame {
             Number preco = format.parse(campoPreco.getText());
             
             if (produtoDAO.updateProduto(new Produto(Integer.parseInt(campoArtigo.getText()), preco.doubleValue(), Integer.parseInt(campoQuantidade.getText()), campoDescricao.getText(), campoCategoria.getText()))){
+                JOptionPane.showMessageDialog(null, "Produto atualizado");
                 carregarProdutos();
             }
         } catch (SQLException ex) {
@@ -295,7 +296,7 @@ public class ManterProdutos extends javax.swing.JFrame {
             try {
             
                 String descricao = campoDescricao.getText();
-                double preco = Double.parseDouble(campoPreco.getText());
+                double preco = Double.parseDouble((campoPreco.getText().replaceAll(",", ".")));
                 String categoria = campoCategoria.getText();
                 int quantidade = Integer.parseInt(campoQuantidade.getText());
                 if (descricao.isBlank() || preco == 0.0 || categoria.isBlank() || quantidade < 0)
@@ -315,7 +316,7 @@ public class ManterProdutos extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NumberFormatException nf) {
-                JOptionPane.showMessageDialog(null, "Ano de nascimento inválido.");
+                JOptionPane.showMessageDialog(null, "Preço inválido.");
             } catch (NullPointerException np) {
                 JOptionPane.showMessageDialog(null, "Dados inválidos.");      
             }
@@ -422,8 +423,9 @@ public class ManterProdutos extends javax.swing.JFrame {
         try {
             ProdutoDAO produtoDAO = new ProdutoDAO();
             DefaultTableModel tableModel = (DefaultTableModel)tabelaClientes.getModel();
+            DecimalFormat df = new DecimalFormat("#,##0.00");
             for (Produto produto:produtoDAO.findAllProduto()){
-                tableModel.addRow(new Object[]{produto.getArtigo(), produto.getDescricao() , produto.getCategoria(), produto.getQtde_produto(), produto.getPreco()});
+                tableModel.addRow(new Object[]{produto.getArtigo(), produto.getDescricao() , produto.getCategoria(), produto.getQtde_produto(), "R$" + df.format(produto.getPreco())});
             }
             produtoDAO.close();
         } catch (SQLException ex) {
