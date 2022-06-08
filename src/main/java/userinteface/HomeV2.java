@@ -323,7 +323,8 @@ public class HomeV2 extends javax.swing.JFrame {
     }//GEN-LAST:event_menuPerfilEditarActionPerformed
 
     private void menuRelatorioProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRelatorioProdutosActionPerformed
-        // TODO add your handling code here:
+        RelatorioProdutos window = new RelatorioProdutos();
+        window.setVisible(true);
     }//GEN-LAST:event_menuRelatorioProdutosActionPerformed
 
     private void menuGerenciarProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGerenciarProdutosActionPerformed

@@ -2,6 +2,7 @@
 package dao;
 
 import com.mycompany.projetoa3.Connexao_SQL;
+import dados.relatorios.RelatorioVendaProduto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -59,6 +60,20 @@ public class Venda_ProdutoDAO {
             
         }
         return true;
+    }
+    
+    public List<RelatorioVendaProduto> findVendasGroupByProduto() throws SQLException{
+        String sql = "SELECT produto.descricao, sum(venda_produto.qtde_vendida), sum(venda_produto.qtde_vendida * venda_produto.preco_venda) "
+                + "FROM venda_produto JOIN produto on produto.artigo = venda_produto.cod_produto"
+                + " group by venda_produto.cod_produto;";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        ResultSet result = statement.executeQuery();
+        List<RelatorioVendaProduto> vendas = new ArrayList<>();
+        while (result.next()) {
+            vendas.add(new RelatorioVendaProduto(result.getString(1), result.getInt(2), result.getDouble(3)));          
+        }
+        return vendas;
+        
     }
     
     public void close() throws SQLException{

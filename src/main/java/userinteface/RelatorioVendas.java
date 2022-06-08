@@ -66,6 +66,7 @@ public class RelatorioVendas extends javax.swing.JFrame {
 
         painelTodas.setLayout(new java.awt.BorderLayout());
 
+        tabelaVendas.setAutoCreateRowSorter(true);
         tabelaVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
