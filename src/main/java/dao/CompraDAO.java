@@ -41,10 +41,28 @@ public class CompraDAO {
     }
     
     //Encontrar Compra por cpf do cliente
-    public List<Compra> findCompraByCpf(int cpf) throws SQLException{
-        String sqlQuery = "SELECT compra.*, cliente.* FROM compra JOIN cliente ON compra.cpf_cliente = cliente.cpf WHERE cliente.cpf = ?;";
+    public List<Compra> findCompraByCpf(String cpf) throws SQLException{
+        String sqlQuery = "SELECT compra.*, cliente.* FROM compra JOIN cliente ON compra.cpf_cliente = cliente.cpf WHERE cliente.cpf = ? AND estado = ?;";
         PreparedStatement statment = connection.prepareStatement(sqlQuery);
-        statment.setInt(1, cpf);
+        statment.setString(1, cpf);
+        ResultSet result = statment.executeQuery();
+        List<Compra> compras = new ArrayList<>();
+        while (result.next()){
+            compras.add(new Compra(result.getInt(1), //nf
+                              result.getDate(2), //compra 
+                              new Cliente(result.getString(5), result.getString(6), result.getInt(7), result.getString(8), result.getString(9)),
+                              new Venda_ProdutoDAO().findVenda_Produto(result.getInt(1)),
+                              result.getString(4)
+                            )
+            );         
+        }
+        return compras;
+    }
+    public List<Compra> findCompraByCpf(String cpf, String estado) throws SQLException{
+        String sqlQuery = "SELECT compra.*, cliente.* FROM compra JOIN cliente ON compra.cpf_cliente = cliente.cpf WHERE cliente.cpf = ? AND estado LIKE ?;";
+        PreparedStatement statment = connection.prepareStatement(sqlQuery);
+        statment.setString(1, cpf);
+        statment.setString(2, "%" + estado);
         ResultSet result = statment.executeQuery();
         List<Compra> compras = new ArrayList<>();
         while (result.next()){
@@ -159,7 +177,7 @@ public class CompraDAO {
     
     
     //insere uma compra no banco de dados
-    public boolean insertCompra(Compra compra) throws SQLException{
+    public int insertCompra(Compra compra) throws SQLException{
         String sql = "INSERT INTO compra (data_compra, cpf_cliente) VALUES (?, ?)";
         PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         statement.setDate(1, compra.getDataCompra());
@@ -170,11 +188,22 @@ public class CompraDAO {
             ResultSet keys = statement.getGeneratedKeys();
             if (keys.next()){
                 if (new Venda_ProdutoDAO().insertVenda_Produto(compra.getProdutos(), keys.getLong(1)))
-                    return true;
+                    return (int)keys.getLong(1);
             }
         }
-        return false;
+        return 0;
         
+    }
+    
+    
+    //altera estado da compra
+    public boolean updateCompraEstado(int nf, String estado) throws SQLException{
+        String sqlQuery = "UPDATE compra SET estado = ? WHERE (nf = ?);";
+        PreparedStatement statment = connection.prepareStatement(sqlQuery);
+        statment.setString(1, estado);
+        statment.setInt(2, nf);
+        int rowsAffected = statment.executeUpdate();      
+        return (rowsAffected > 0);
     }
     
     public void close() throws SQLException{

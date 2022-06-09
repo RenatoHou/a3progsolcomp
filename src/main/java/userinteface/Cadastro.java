@@ -89,11 +89,11 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel1.setText("Cadastre-se");
         jLabel1.setToolTipText("");
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setBackground(new java.awt.Color(0, 51, 102));
 
         campoIdade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
         campoIdade.setText("Idade");
-        campoIdade.setToolTipText("Ano de nascimento");
+        campoIdade.setToolTipText("Idade");
         campoIdade.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 campoIdadeFocusGained(evt);
@@ -119,9 +119,8 @@ public class Cadastro extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(botaoCadastrar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(campoNome, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
@@ -150,10 +149,7 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(9, 9, 9)
                 .addComponent(botaoCadastrar)
                 .addGap(88, 88, 88))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
         );
 
         pack();
@@ -188,7 +184,7 @@ public class Cadastro extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NumberFormatException nf) {
-            JOptionPane.showMessageDialog(null, "Ano de nascimento inválido.");
+            JOptionPane.showMessageDialog(null, "Idade inválida.");
         } catch (NullPointerException np) {
             JOptionPane.showMessageDialog(null, "Dados inválidos.");      
         }

@@ -311,9 +311,13 @@ public class ManterCadastros extends javax.swing.JFrame {
             ClienteDAO clienteDAO = new ClienteDAO();
             if (clienteDAO.updateCliente(new Cliente(campoCPF.getText(),campoNome.getText(), Integer.parseInt(campoIdade.getText()), campoEmail.getText(), null ))){
                 carregarClientes();
+                JOptionPane.showMessageDialog(null, "Cadastro atualizado.");
+            }else{
+                System.out.println(campoCPF.getText() + campoNome.getText() + Integer.parseInt(campoIdade.getText()) + campoEmail.getText());
+                JOptionPane.showMessageDialog(null, "Erro ao atualizar cadastro.");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ManterCadastros.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Erro update cliente");
         }
     }//GEN-LAST:event_botaoEditarActionPerformed
 
@@ -338,7 +342,11 @@ public class ManterCadastros extends javax.swing.JFrame {
                 int ano = Year.now().getValue() - idade;
                 Cliente cliente = new Cliente(cpf, nome, ano, email, senha);
                 ClienteDAO clienteDAO = new ClienteDAO();
-                clienteDAO.insertCliente(cliente);
+                if (funcionarios)
+                    clienteDAO.insertFuncionario(cliente);
+                else
+                    clienteDAO.insertCliente(cliente);
+                
                 clienteDAO.close();
                 JOptionPane.showMessageDialog(null, "Cadastro realizado");
                 botaoRemover.setEnabled(false);
@@ -349,7 +357,7 @@ public class ManterCadastros extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(Cadastro.class.getName()).log(Level.SEVERE, null, ex);
             } catch (NumberFormatException nf) {
-                JOptionPane.showMessageDialog(null, "Ano de nascimento inválido.");
+                JOptionPane.showMessageDialog(null, "Idade inválida.");
             } catch (NullPointerException np) {
                 JOptionPane.showMessageDialog(null, "Dados inválidos.");      
             }

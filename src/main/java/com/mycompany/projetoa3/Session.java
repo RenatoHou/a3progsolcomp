@@ -90,15 +90,20 @@ public final class Session {
         return 0;
     }
     
-    public static void fecharPedido(){
+    public static int fecharPedido(){
         CompraDAO compraDao;
         try {
             compraDao = new CompraDAO();
-            compraDao.insertCompra(carrinho);
+            int nf = compraDao.insertCompra(carrinho);
+            return nf;
         } catch (SQLException ex) {
             Logger.getLogger(Session.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        return 0;
+    }
+    
+    public static void novoCarrinho(){
+        carrinho = new Compra(new java.sql.Date(Calendar.getInstance().getTimeInMillis()), user);
     }
     
 }

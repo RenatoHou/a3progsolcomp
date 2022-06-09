@@ -28,6 +28,8 @@ public class ClienteDAO {
         statment.setString(4, cliente.getEmail());
         statment.setString(5, cliente.getSenha());
         statment.setBoolean(6, admin);
+        System.out.println(admin);
+        System.out.println(statment);
         int rowsInserted = statment.executeUpdate();      
         return (rowsInserted > 0);
     }

@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import model.Produto;
 import model.Venda_Produto;
@@ -58,8 +59,8 @@ public class HomeV2 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         painelAcessoriosCenter = new javax.swing.JPanel();
         painelOutros = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         painelOutrosCenter = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         labelTotalFinal = new javax.swing.JLabel();
@@ -91,9 +92,12 @@ public class HomeV2 extends javax.swing.JFrame {
             }
         });
 
-        painelHome.setBackground(new java.awt.Color(0, 102, 102));
+        jTabbedPane2.setBackground(new java.awt.Color(0, 51, 102));
+        jTabbedPane2.setForeground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+        painelHome.setBackground(new java.awt.Color(0, 102, 153));
+
+        jPanel2.setBackground(new java.awt.Color(0, 102, 204));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -125,35 +129,40 @@ public class HomeV2 extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Home", painelHome);
 
-        painelMasculino.setBackground(new java.awt.Color(0, 102, 102));
+        painelMasculino.setBackground(new java.awt.Color(0, 102, 153));
         painelMasculino.setLayout(new java.awt.BorderLayout());
 
+        jLabel1.setBackground(new java.awt.Color(29, 0, 60));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel1.setText("Os melhores");
         jLabel1.setToolTipText("");
         painelMasculino.add(jLabel1, java.awt.BorderLayout.NORTH);
 
+        painelMasculinoCenter.setBackground(new java.awt.Color(29, 0, 60));
+        painelMasculinoCenter.setForeground(new java.awt.Color(29, 0, 60));
         painelMasculinoCenter.setOpaque(false);
         painelMasculinoCenter.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 12, 12));
         painelMasculino.add(painelMasculinoCenter, java.awt.BorderLayout.CENTER);
 
         jTabbedPane2.addTab("Masculino", painelMasculino);
 
-        painelFeminino.setBackground(new java.awt.Color(0, 102, 102));
+        painelFeminino.setBackground(new java.awt.Color(0, 102, 153));
         painelFeminino.setLayout(new java.awt.BorderLayout());
 
+        jLabel2.setBackground(new java.awt.Color(102, 0, 255));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel2.setText("Os melhores");
+        jLabel2.setText(" Os melhores");
         jLabel2.setToolTipText("");
         painelFeminino.add(jLabel2, java.awt.BorderLayout.NORTH);
 
+        painelFemininoCenter.setBackground(new java.awt.Color(29, 0, 60));
         painelFemininoCenter.setOpaque(false);
         painelFemininoCenter.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 12, 12));
         painelFeminino.add(painelFemininoCenter, java.awt.BorderLayout.CENTER);
 
         jTabbedPane2.addTab("Feminino", painelFeminino);
 
-        painelAcessorios.setBackground(new java.awt.Color(0, 102, 102));
+        painelAcessorios.setBackground(new java.awt.Color(0, 102, 153));
         painelAcessorios.setLayout(new java.awt.BorderLayout());
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
@@ -167,16 +176,17 @@ public class HomeV2 extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Acessórios", painelAcessorios);
 
-        painelOutros.setBackground(new java.awt.Color(0, 102, 102));
+        painelOutros.setBackground(new java.awt.Color(0, 102, 153));
         painelOutros.setLayout(new java.awt.BorderLayout());
+
+        painelOutrosCenter.setOpaque(false);
+        painelOutrosCenter.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 12, 12));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel4.setText("Os melhores");
         jLabel4.setToolTipText("");
-        painelOutros.add(jLabel4, java.awt.BorderLayout.NORTH);
+        painelOutrosCenter.add(jLabel4);
 
-        painelOutrosCenter.setOpaque(false);
-        painelOutrosCenter.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 12, 12));
         painelOutros.add(painelOutrosCenter, java.awt.BorderLayout.CENTER);
 
         jTabbedPane2.addTab("Outros", painelOutros);
@@ -190,15 +200,18 @@ public class HomeV2 extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(0, 153, 153));
         jPanel3.setLayout(new java.awt.GridLayout(2, 1, 2, 2));
 
-        labelTotalFinal.setBackground(new java.awt.Color(0, 153, 153));
+        labelTotalFinal.setBackground(new java.awt.Color(207, 235, 252));
         labelTotalFinal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        labelTotalFinal.setForeground(new java.awt.Color(255, 255, 255));
+        labelTotalFinal.setForeground(new java.awt.Color(32, 61, 146));
         labelTotalFinal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelTotalFinal.setText("R$0,00");
         labelTotalFinal.setOpaque(true);
         jPanel3.add(labelTotalFinal);
 
+        botaoFecharPedido.setBackground(new java.awt.Color(32, 61, 146));
+        botaoFecharPedido.setForeground(new java.awt.Color(0, 0, 0));
         botaoFecharPedido.setText("Fechar pedido");
+        botaoFecharPedido.setBorder(null);
         botaoFecharPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoFecharPedidoActionPerformed(evt);
@@ -208,7 +221,7 @@ public class HomeV2 extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, java.awt.BorderLayout.SOUTH);
 
-        painelCarrinho.setBackground(new java.awt.Color(0, 153, 153));
+        painelCarrinho.setBackground(new java.awt.Color(207, 235, 252));
         painelCarrinho.setPreferredSize(new java.awt.Dimension(180, 510));
         painelCarrinho.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -219,8 +232,13 @@ public class HomeV2 extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.WEST);
 
+        menu.setBackground(new java.awt.Color(0, 0, 51));
+        menu.setForeground(new java.awt.Color(0, 0, 0));
+
+        menuPerfil.setForeground(new java.awt.Color(255, 255, 255));
         menuPerfil.setText("Perfil");
 
+        menuPerfilEditar.setForeground(new java.awt.Color(255, 255, 255));
         menuPerfilEditar.setText("Editar");
         menuPerfilEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,8 +249,10 @@ public class HomeV2 extends javax.swing.JFrame {
 
         menu.add(menuPerfil);
 
+        menuGerenciar.setForeground(new java.awt.Color(255, 255, 255));
         menuGerenciar.setText("Gerenciar");
 
+        menuGerenciarClientes.setForeground(new java.awt.Color(255, 255, 255));
         menuGerenciarClientes.setText("Clientes");
         menuGerenciarClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,9 +261,16 @@ public class HomeV2 extends javax.swing.JFrame {
         });
         menuGerenciar.add(menuGerenciarClientes);
 
+        jMenuItem1.setForeground(new java.awt.Color(255, 255, 255));
         jMenuItem1.setText("Vendas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         menuGerenciar.add(jMenuItem1);
 
+        menuGerenciarFuncionarios.setForeground(new java.awt.Color(255, 255, 255));
         menuGerenciarFuncionarios.setText("Funcionários");
         menuGerenciarFuncionarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,6 +279,7 @@ public class HomeV2 extends javax.swing.JFrame {
         });
         menuGerenciar.add(menuGerenciarFuncionarios);
 
+        menuGerenciarProdutos.setForeground(new java.awt.Color(255, 255, 255));
         menuGerenciarProdutos.setText("Produtos");
         menuGerenciarProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,8 +290,10 @@ public class HomeV2 extends javax.swing.JFrame {
 
         menu.add(menuGerenciar);
 
+        menuRelatorios.setForeground(new java.awt.Color(255, 255, 255));
         menuRelatorios.setText("Relatórios");
 
+        menuRelatoriosVendas.setForeground(new java.awt.Color(255, 255, 255));
         menuRelatoriosVendas.setText("Vendas");
         menuRelatoriosVendas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,6 +302,7 @@ public class HomeV2 extends javax.swing.JFrame {
         });
         menuRelatorios.add(menuRelatoriosVendas);
 
+        menuRelatorioProdutos.setForeground(new java.awt.Color(255, 255, 255));
         menuRelatorioProdutos.setText("Produtos");
         menuRelatorioProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,9 +333,10 @@ public class HomeV2 extends javax.swing.JFrame {
     }//GEN-LAST:event_painelCarrinhoMousePressed
 
     private void botaoFecharPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFecharPedidoActionPerformed
-        Session.fecharPedido();
-        Session.newSession();
-        this.dispose();
+        int nf = Session.fecharPedido();
+        JOptionPane.showMessageDialog(null, "Compra concluida.\nO número do seu pedido é: " + nf);
+        Session.novoCarrinho();
+        atualizaCarrinho();
     }//GEN-LAST:event_botaoFecharPedidoActionPerformed
 
     private void menuGerenciarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGerenciarClientesActionPerformed
@@ -336,6 +368,11 @@ public class HomeV2 extends javax.swing.JFrame {
         RelatorioVendas window = new RelatorioVendas();
         window.setVisible(true);
     }//GEN-LAST:event_menuRelatoriosVendasActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        ManterVendas window = new ManterVendas();
+        window.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -422,74 +459,154 @@ public class HomeV2 extends javax.swing.JFrame {
     }
     
     public void addProduto(Produto produto){
-        java.awt.GridBagConstraints gridBagConstraints;
-        JPanel painelProtudo = new JPanel();
-        painelProtudo.setBackground(java.awt.Color.gray);
-        painelProtudo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 51), 3, true));
-        painelProtudo.setForeground(java.awt.Color.white);
-        painelProtudo.setMaximumSize(getPreferredSize());
-        painelProtudo.setMinimumSize(getPreferredSize());
-        painelProtudo.setPreferredSize(new java.awt.Dimension(250, 375));
-        painelProtudo.setLayout(new java.awt.GridBagLayout());
+//        java.awt.GridBagConstraints gridBagConstraints;
+//        JPanel painelProtudo = new JPanel();
+//        painelProtudo.setBackground(java.awt.Color.gray);
+//        painelProtudo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 51), 3, true));
+//        painelProtudo.setForeground(java.awt.Color.white);
+//        painelProtudo.setMaximumSize(getPreferredSize());
+//        painelProtudo.setMinimumSize(getPreferredSize());
+//        painelProtudo.setPreferredSize(new java.awt.Dimension(250, 375));
+//        painelProtudo.setLayout(new java.awt.GridBagLayout());
+//
+//        JPanel painelImagemProduto = new JPanel();
+//        painelImagemProduto.setBackground(new java.awt.Color(204, 255, 204));
+//        painelImagemProduto.setMaximumSize(new java.awt.Dimension(200, 300));
+//        painelImagemProduto.setMinimumSize(new java.awt.Dimension(200, 300));
+//        painelImagemProduto.setName(""); // NOI18N
+//        painelImagemProduto.setPreferredSize(new java.awt.Dimension(200, 300));
+//
+//        javax.swing.GroupLayout painelImagemProdutoLayout = new javax.swing.GroupLayout(painelImagemProduto);
+//        painelImagemProduto.setLayout(painelImagemProdutoLayout);
+//        painelImagemProdutoLayout.setHorizontalGroup(
+//            painelImagemProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGap(0, 200, Short.MAX_VALUE)
+//        );
+//        painelImagemProdutoLayout.setVerticalGroup(
+//            painelImagemProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+//            .addGap(0, 0, Short.MAX_VALUE)
+//        );
+//
+//        painelProtudo.add(painelImagemProduto, new java.awt.GridBagConstraints());
+//
+//        JLabel labelNomeProduto = new JLabel();
+//        labelNomeProduto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+//        labelNomeProduto.setForeground(new java.awt.Color(255, 255, 255));
+//        DecimalFormat df = new DecimalFormat("#,##0.00");
+//        
+//        labelNomeProduto.setText(produto.getDescricao() + " R$" + df.format(produto.getPreco()));
+//        gridBagConstraints = new java.awt.GridBagConstraints();
+//        gridBagConstraints.gridx = 0;
+//        gridBagConstraints.gridy = 1;
+//        painelProtudo.add(labelNomeProduto, gridBagConstraints);
+//
+//        JButton botaoComprarProduto = new JButton();
+//        botaoComprarProduto.setBackground(new java.awt.Color(255, 255, 255));
+//        botaoComprarProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+//        botaoComprarProduto.setForeground(new java.awt.Color(0, 0, 0));
+//        botaoComprarProduto.setText("Comprar");
+//        if (produto.getQtde_produto() == 0){
+//            botaoComprarProduto.setEnabled(false);
+//        }else{
+//            botaoComprarProduto.addActionListener(new java.awt.event.ActionListener() {
+//                public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                    adicionarAoCarrinho(produto);
+//                }
+//            });
+//        }
+//        gridBagConstraints = new java.awt.GridBagConstraints();
+//        gridBagConstraints.gridx = 0;
+//        gridBagConstraints.gridy = 2;
+//        painelProtudo.add(botaoComprarProduto, gridBagConstraints);
+        JPanel painelItem = new JPanel();
+        painelItem.setOpaque(false);
+        painelItem.setLayout(new java.awt.BorderLayout(15, 15));
 
-        JPanel painelImagemProduto = new JPanel();
-        painelImagemProduto.setBackground(new java.awt.Color(204, 255, 204));
-        painelImagemProduto.setMaximumSize(new java.awt.Dimension(200, 300));
-        painelImagemProduto.setMinimumSize(new java.awt.Dimension(200, 300));
-        painelImagemProduto.setName(""); // NOI18N
-        painelImagemProduto.setPreferredSize(new java.awt.Dimension(200, 300));
+        JPanel painelDetalhesItem = new JPanel();
+        painelDetalhesItem.setBackground(new java.awt.Color(207, 235, 252));
 
-        javax.swing.GroupLayout painelImagemProdutoLayout = new javax.swing.GroupLayout(painelImagemProduto);
-        painelImagemProduto.setLayout(painelImagemProdutoLayout);
-        painelImagemProdutoLayout.setHorizontalGroup(
-            painelImagemProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-        painelImagemProdutoLayout.setVerticalGroup(
-            painelImagemProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        JLabel labelCategoria = new JLabel();
+        labelCategoria.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelCategoria.setForeground(new java.awt.Color(0, 51, 51));
+        labelCategoria.setText(produto.getCategoria());
 
-        painelProtudo.add(painelImagemProduto, new java.awt.GridBagConstraints());
+        JLabel labelDescricao = new JLabel();
+        labelDescricao.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        labelDescricao.setForeground(new java.awt.Color(0, 51, 51));
+        labelDescricao.setText(produto.getDescricao());
 
-        JLabel labelNomeProduto = new JLabel();
-        labelNomeProduto.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        labelNomeProduto.setForeground(new java.awt.Color(255, 255, 255));
+        JLabel labelPreco = new JLabel();
+        labelPreco.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelPreco.setForeground(new java.awt.Color(0, 51, 51));
         DecimalFormat df = new DecimalFormat("#,##0.00");
-        
-        labelNomeProduto.setText(produto.getDescricao() + " R$" + df.format(produto.getPreco()));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        painelProtudo.add(labelNomeProduto, gridBagConstraints);
+        labelPreco.setText("R$" + df.format(produto.getPreco()));
 
-        JButton botaoComprarProduto = new JButton();
-        botaoComprarProduto.setBackground(new java.awt.Color(255, 255, 255));
-        botaoComprarProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        botaoComprarProduto.setForeground(new java.awt.Color(0, 0, 0));
-        botaoComprarProduto.setText("Comprar");
+        JLabel labelCenter = new JLabel();
+        
+        javax.swing.GroupLayout painelDetalhesItemLayout = new javax.swing.GroupLayout(painelDetalhesItem);
+        painelDetalhesItem.setLayout(painelDetalhesItemLayout);
+        painelDetalhesItemLayout.setHorizontalGroup(
+            painelDetalhesItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelDetalhesItemLayout.createSequentialGroup()
+                .addGroup(painelDetalhesItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelCenter, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(painelDetalhesItemLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(painelDetalhesItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelDescricao)
+                            .addGroup(painelDetalhesItemLayout.createSequentialGroup()
+                                .addGap(52, 52, 52)
+                                .addComponent(labelPreco)))))
+                .addGap(0, 17, Short.MAX_VALUE))
+            .addGroup(painelDetalhesItemLayout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(labelCategoria)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        painelDetalhesItemLayout.setVerticalGroup(
+            painelDetalhesItemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelDetalhesItemLayout.createSequentialGroup()
+                .addComponent(labelCategoria)
+                .addGap(34, 34, 34)
+                .addComponent(labelCenter)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelDescricao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelPreco)
+                .addGap(12, 12, 12))
+        );
+
+        painelItem.add(painelDetalhesItem, java.awt.BorderLayout.CENTER);
+
+        JButton botaoComprar = new JButton();
+        botaoComprar.setBackground(new java.awt.Color(0, 51, 102));
+        botaoComprar.setForeground(new java.awt.Color(255, 255, 255));
+        botaoComprar.setText("Comprar");
+        botaoComprar.setBorder(null);
+        botaoComprar.setMaximumSize(new java.awt.Dimension(47, 35));
+        botaoComprar.setMinimumSize(new java.awt.Dimension(47, 30));
+        botaoComprar.setPreferredSize(new java.awt.Dimension(47, 30));
+        
+        
         if (produto.getQtde_produto() == 0){
-            botaoComprarProduto.setEnabled(false);
+            botaoComprar.setEnabled(false);
         }else{
-            botaoComprarProduto.addActionListener(new java.awt.event.ActionListener() {
+        botaoComprar.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
                     adicionarAoCarrinho(produto);
                 }
             });
         }
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        painelProtudo.add(botaoComprarProduto, gridBagConstraints);
+        painelItem.add(botaoComprar, java.awt.BorderLayout.SOUTH);
         
         if (produto.getCategoria().equals("masculino"))
-            painelMasculinoCenter.add(painelProtudo);
+            painelMasculinoCenter.add(painelItem);
         else if (produto.getCategoria().equals("feminino"))
-            painelFemininoCenter.add(painelProtudo);
+            painelFemininoCenter.add(painelItem);
         else if (produto.getCategoria().equals("acessorio"))
-            painelAcessoriosCenter.add(painelProtudo);
+            painelAcessoriosCenter.add(painelItem);
         else
-            painelOutrosCenter.add(painelProtudo);
+            painelOutrosCenter.add(painelItem);
         
 
     }

@@ -2,10 +2,8 @@ package com.mycompany.projetoa3;
 
 
 import java.sql.SQLException;
-import userinteface.Cadastro;
-import userinteface.HomeV2;
 import userinteface.Login;
-import userinteface.ManterClientes;
+
 
 
 public class ProjetoA3 {

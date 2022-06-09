@@ -63,6 +63,7 @@ public class ManterFuncionarios extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        tabelaClientes.setBackground(new java.awt.Color(51, 51, 51));
         tabelaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -86,9 +87,14 @@ public class ManterFuncionarios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelaClientes);
 
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+
+        campoNome.setBackground(new java.awt.Color(204, 204, 204));
+
         jLabel1.setText("Nome");
 
         campoCPF.setEditable(false);
+        campoCPF.setBackground(new java.awt.Color(204, 204, 204));
         try {
             campoCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
@@ -97,11 +103,17 @@ public class ManterFuncionarios extends javax.swing.JFrame {
 
         jLabel2.setText("CPF");
 
+        campoIdade.setBackground(new java.awt.Color(204, 204, 204));
+
         jLabel3.setText("Idade");
+
+        campoEmail.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel4.setText("Email");
 
         labelSenha.setText("Senha");
+
+        campoSenha.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -156,6 +168,10 @@ public class ManterFuncionarios extends javax.swing.JFrame {
                     .addContainerGap(72, Short.MAX_VALUE)))
         );
 
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setForeground(new java.awt.Color(51, 0, 51));
+
+        botaoRemover.setBackground(new java.awt.Color(204, 0, 0));
         botaoRemover.setText("Remover");
         botaoRemover.setEnabled(false);
         botaoRemover.addActionListener(new java.awt.event.ActionListener() {
@@ -174,6 +190,8 @@ public class ManterFuncionarios extends javax.swing.JFrame {
             }
         });
 
+        botaoNovo.setBackground(new java.awt.Color(0, 204, 255));
+        botaoNovo.setForeground(new java.awt.Color(255, 255, 255));
         botaoNovo.setText("Novo");
         botaoNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,6 +199,8 @@ public class ManterFuncionarios extends javax.swing.JFrame {
             }
         });
 
+        botaoCancela.setBackground(new java.awt.Color(204, 0, 0));
+        botaoCancela.setForeground(new java.awt.Color(255, 255, 255));
         botaoCancela.setText("Cancela");
         botaoCancela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,7 +243,7 @@ public class ManterFuncionarios extends javax.swing.JFrame {
                 .addContainerGap(92, Short.MAX_VALUE))
         );
 
-        labelTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        labelTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelTitle.setText("Editar dados dos funcionários:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -319,9 +339,9 @@ public class ManterFuncionarios extends javax.swing.JFrame {
                     throw new NumberFormatException();
                 }
                 int ano = Year.now().getValue() - idade;
-                Cliente cliente = new Cliente(cpf, nome, ano, email, senha);
+                Cliente cliente = new Cliente(cpf, nome, ano, email, senha, true, false);
                 ClienteDAO clienteDAO = new ClienteDAO();
-                clienteDAO.insertCliente(cliente);
+                clienteDAO.insertFuncionario(cliente);
                 clienteDAO.close();
                 JOptionPane.showMessageDialog(null, "Cadastro realizado");
                 botaoRemover.setEnabled(false);

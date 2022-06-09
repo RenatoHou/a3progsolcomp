@@ -61,10 +61,14 @@ public class Perfil extends javax.swing.JFrame {
         labelTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(51, 0, 51));
+
+        campoNome.setBackground(new java.awt.Color(207, 235, 252));
 
         jLabel1.setText("Nome");
 
         campoCPF.setEditable(false);
+        campoCPF.setBackground(new java.awt.Color(207, 235, 252));
         try {
             campoCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
@@ -73,12 +77,20 @@ public class Perfil extends javax.swing.JFrame {
 
         jLabel2.setText("CPF");
 
+        campoIdade.setBackground(new java.awt.Color(207, 235, 252));
+
         jLabel3.setText("Idade");
+
+        campoEmail.setBackground(new java.awt.Color(207, 235, 252));
 
         jLabel4.setText("Email");
 
         labelSenha.setText("Senha");
 
+        campoSenha.setBackground(new java.awt.Color(207, 235, 252));
+
+        botaoEditar.setBackground(new java.awt.Color(32, 61, 146));
+        botaoEditar.setForeground(new java.awt.Color(255, 255, 255));
         botaoEditar.setText("Editar");
         botaoEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -65,6 +65,7 @@ public class ManterProdutos extends javax.swing.JFrame {
         labelTitle = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(29, 0, 60));
 
         tabelaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,20 +94,37 @@ public class ManterProdutos extends javax.swing.JFrame {
             tabelaClientes.getColumnModel().getColumn(0).setPreferredWidth(25);
         }
 
+        campoDescricao.setBackground(new java.awt.Color(207, 235, 252));
+        campoDescricao.setForeground(new java.awt.Color(0, 0, 0));
+
         jLabel1.setText("Descrição");
 
         jLabel2.setText("Preço");
 
         jLabel3.setText("Quantidade");
 
+        campoCategoria.setBackground(new java.awt.Color(207, 235, 252));
+        campoCategoria.setForeground(new java.awt.Color(0, 0, 0));
+        campoCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoCategoriaActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Categoria");
 
+        campoQuantidade.setBackground(new java.awt.Color(207, 235, 252));
+        campoQuantidade.setForeground(new java.awt.Color(0, 0, 0));
         campoQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
 
         jLabel6.setText("Artigo");
 
         campoArtigo.setEditable(false);
+        campoArtigo.setBackground(new java.awt.Color(207, 235, 252));
+        campoArtigo.setForeground(new java.awt.Color(0, 0, 0));
 
+        campoPreco.setBackground(new java.awt.Color(207, 235, 252));
+        campoPreco.setForeground(new java.awt.Color(0, 0, 0));
         campoPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
         campoPreco.setActionCommand("<Not Set>");
 
@@ -155,6 +173,9 @@ public class ManterProdutos extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+
+        botaoRemover.setBackground(new java.awt.Color(204, 0, 0));
         botaoRemover.setText("Remover");
         botaoRemover.setEnabled(false);
         botaoRemover.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +184,8 @@ public class ManterProdutos extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Açoes:");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("Ações:");
 
         botaoEditar.setText("Editar");
         botaoEditar.setEnabled(false);
@@ -173,14 +195,19 @@ public class ManterProdutos extends javax.swing.JFrame {
             }
         });
 
+        botaoNovo.setBackground(new java.awt.Color(0, 153, 51));
+        botaoNovo.setForeground(new java.awt.Color(255, 255, 255));
         botaoNovo.setText("Novo");
+        botaoNovo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         botaoNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoNovoActionPerformed(evt);
             }
         });
 
-        botaoCancela.setText("Cancela");
+        botaoCancela.setBackground(new java.awt.Color(204, 0, 0));
+        botaoCancela.setForeground(new java.awt.Color(255, 255, 255));
+        botaoCancela.setText("Cancelar");
         botaoCancela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoCancelaActionPerformed(evt);
@@ -199,30 +226,30 @@ public class ManterProdutos extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(botaoEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                             .addComponent(botaoRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botaoEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(botaoNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(botaoCancela, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(9, 9, 9)
                 .addComponent(botaoRemover)
-                .addGap(39, 39, 39)
+                .addGap(40, 40, 40)
                 .addComponent(botaoEditar)
-                .addGap(47, 47, 47)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoNovo)
-                    .addComponent(botaoCancela))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(botaoNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botaoCancela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(100, 100, 100))
         );
 
-        labelTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        labelTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelTitle.setText("Editar dados dos produtos:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -252,7 +279,7 @@ public class ManterProdutos extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
@@ -265,7 +292,7 @@ public class ManterProdutos extends javax.swing.JFrame {
         campoDescricao.setText(tableModel.getValueAt(selectedRow, 1).toString());
         campoCategoria.setText(tableModel.getValueAt(selectedRow, 2).toString());
         campoQuantidade.setText(tableModel.getValueAt(selectedRow, 3).toString());
-        campoPreco.setText(tableModel.getValueAt(selectedRow, 4).toString().replace("R$", ""));
+        campoPreco.setText(tableModel.getValueAt(selectedRow, 4).toString());
         botaoRemover.setEnabled(true);
         botaoEditar.setEnabled(true);
     }//GEN-LAST:event_tabelaClientesMouseClicked
@@ -278,7 +305,6 @@ public class ManterProdutos extends javax.swing.JFrame {
             Number preco = format.parse(campoPreco.getText());
             
             if (produtoDAO.updateProduto(new Produto(Integer.parseInt(campoArtigo.getText()), preco.doubleValue(), Integer.parseInt(campoQuantidade.getText()), campoDescricao.getText(), campoCategoria.getText()))){
-                JOptionPane.showMessageDialog(null, "Produto atualizado");
                 carregarProdutos();
             }
         } catch (SQLException ex) {
@@ -296,7 +322,9 @@ public class ManterProdutos extends javax.swing.JFrame {
             try {
             
                 String descricao = campoDescricao.getText();
-                double preco = Double.parseDouble((campoPreco.getText().replaceAll(",", ".")));
+                DecimalFormat df = new DecimalFormat("#,###.##");
+                
+                double preco = Double.parseDouble(df.format(campoPreco.getText()));
                 String categoria = campoCategoria.getText();
                 int quantidade = Integer.parseInt(campoQuantidade.getText());
                 if (descricao.isBlank() || preco == 0.0 || categoria.isBlank() || quantidade < 0)
@@ -358,6 +386,10 @@ public class ManterProdutos extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_botaoRemoverActionPerformed
+
+    private void campoCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -423,9 +455,8 @@ public class ManterProdutos extends javax.swing.JFrame {
         try {
             ProdutoDAO produtoDAO = new ProdutoDAO();
             DefaultTableModel tableModel = (DefaultTableModel)tabelaClientes.getModel();
-            DecimalFormat df = new DecimalFormat("#,##0.00");
             for (Produto produto:produtoDAO.findAllProduto()){
-                tableModel.addRow(new Object[]{produto.getArtigo(), produto.getDescricao() , produto.getCategoria(), produto.getQtde_produto(), "R$" + df.format(produto.getPreco())});
+                tableModel.addRow(new Object[]{produto.getArtigo(), produto.getDescricao() , produto.getCategoria(), produto.getQtde_produto(), produto.getPreco()});
             }
             produtoDAO.close();
         } catch (SQLException ex) {

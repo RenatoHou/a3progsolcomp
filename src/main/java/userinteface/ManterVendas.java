@@ -4,6 +4,7 @@
  */
 package userinteface;
 
+import com.mycompany.projetoa3.Session;
 import dados.relatorios.DadosRelatorioCliente;
 import dados.relatorios.DadosRelatorioEstado;
 import dao.CompraDAO;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Compra;
 
@@ -20,12 +22,12 @@ import model.Compra;
  *
  * @author renat
  */
-public class RelatorioVendas extends javax.swing.JFrame {
+public class ManterVendas extends javax.swing.JFrame {
 
     /**
      * Creates new form RelatorioVendas
      */
-    public RelatorioVendas() {
+    public ManterVendas() {
         initComponents();
         carregarDados();
     }
@@ -47,17 +49,25 @@ public class RelatorioVendas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         boxProcurar = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
-        labelTotalFinal = new javax.swing.JLabel();
+        labelNumero = new javax.swing.JLabel();
+        labelNF = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        boxEstado = new javax.swing.JComboBox<>();
+        botaoMudar = new javax.swing.JButton();
         painelClientes = new javax.swing.JPanel();
         jpanel = new javax.swing.JScrollPane();
         tabelaVendasPorCliente = new javax.swing.JTable();
         header1 = new javax.swing.JPanel();
+        campoCPF = new javax.swing.JFormattedTextField();
+        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         boxProcurarPorCliente = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabelaVendasPorEstado = new javax.swing.JTable();
+        labelNumero1 = new javax.swing.JLabel();
+        labelNF1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        boxEstado1 = new javax.swing.JComboBox<>();
+        botaoMudar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(500, 350));
@@ -85,6 +95,11 @@ public class RelatorioVendas extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tabelaVendas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaVendasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelaVendas);
         if (tabelaVendas.getColumnModel().getColumnCount() > 0) {
             tabelaVendas.getColumnModel().getColumn(4).setHeaderValue("Estado");
@@ -102,7 +117,7 @@ public class RelatorioVendas extends javax.swing.JFrame {
 
         boxProcurar.setBackground(new java.awt.Color(255, 255, 255));
         boxProcurar.setForeground(new java.awt.Color(0, 0, 0));
-        boxProcurar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "Não Canceladas", "Processamento", "Finalizada", "Canceladas", "" }));
+        boxProcurar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "Não Canceladas", "Processamento", "Finalizada", "Cancelada", "" }));
         boxProcurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxProcurarActionPerformed(evt);
@@ -117,9 +132,29 @@ public class RelatorioVendas extends javax.swing.JFrame {
         flowLayout1.setAlignOnBaseline(true);
         jPanel2.setLayout(flowLayout1);
 
-        labelTotalFinal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        labelTotalFinal.setText("Total: ");
-        jPanel2.add(labelTotalFinal);
+        labelNumero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelNumero.setForeground(new java.awt.Color(255, 255, 255));
+        labelNumero.setText("NF:");
+        jPanel2.add(labelNumero);
+
+        labelNF.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.add(labelNF);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Mudar estado");
+        jPanel2.add(jLabel4);
+
+        boxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Processando", "Finalizada", "Cancelada" }));
+        jPanel2.add(boxEstado);
+
+        botaoMudar.setText("Mudar");
+        botaoMudar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoMudarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(botaoMudar);
 
         painelTodas.add(jPanel2, java.awt.BorderLayout.PAGE_END);
 
@@ -133,15 +168,20 @@ public class RelatorioVendas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Valor Total", "Nome", "CPF", "Idade"
+                "Número", "Data", "CPF", "Valor Total", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tabelaVendasPorCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaVendasPorClienteMouseClicked(evt);
             }
         });
         jpanel.setViewportView(tabelaVendasPorCliente);
@@ -151,6 +191,23 @@ public class RelatorioVendas extends javax.swing.JFrame {
         header1.setBackground(new java.awt.Color(0, 102, 153));
         header1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 10));
 
+        try {
+            campoCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        campoCPF.setMinimumSize(new java.awt.Dimension(160, 22));
+        campoCPF.setPreferredSize(new java.awt.Dimension(90, 22));
+        header1.add(campoCPF);
+
+        jButton1.setText("Procurar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        header1.add(jButton1);
+
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Mostrar: ");
@@ -158,7 +215,7 @@ public class RelatorioVendas extends javax.swing.JFrame {
 
         boxProcurarPorCliente.setBackground(new java.awt.Color(255, 255, 255));
         boxProcurarPorCliente.setForeground(new java.awt.Color(0, 0, 0));
-        boxProcurarPorCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "Não Canceladas", "Processamento", "Finalizada", "Canceladas", "" }));
+        boxProcurarPorCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todas", "Processamento", "Finalizada", "Canceladas", "" }));
         boxProcurarPorCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boxProcurarPorClienteActionPerformed(evt);
@@ -173,34 +230,34 @@ public class RelatorioVendas extends javax.swing.JFrame {
         java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 15, 15);
         flowLayout2.setAlignOnBaseline(true);
         jPanel3.setLayout(flowLayout2);
-        painelClientes.add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
-        jTabbedPane1.addTab("Por cliente", painelClientes);
+        labelNumero1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelNumero1.setForeground(new java.awt.Color(255, 255, 255));
+        labelNumero1.setText("NF:");
+        jPanel3.add(labelNumero1);
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        labelNF1.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel3.add(labelNF1);
 
-        tabelaVendasPorEstado.setBackground(new java.awt.Color(255, 255, 255));
-        tabelaVendasPorEstado.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Mudar estado");
+        jPanel3.add(jLabel5);
 
-            },
-            new String [] {
-                "Estado", "Quantidade", "Porcentagem (qtd)", "Valor total", "Porcentagem (valor)"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
+        boxEstado1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Processando", "Finalizada", "Cancelada" }));
+        jPanel3.add(boxEstado1);
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        botaoMudar1.setText("Mudar");
+        botaoMudar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoMudar1ActionPerformed(evt);
             }
         });
-        jScrollPane2.setViewportView(tabelaVendasPorEstado);
+        jPanel3.add(botaoMudar1);
 
-        jPanel1.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+        painelClientes.add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
-        jTabbedPane1.addTab("Por estado ", jPanel1);
+        jTabbedPane1.addTab("Por CPF", painelClientes);
 
         getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
 
@@ -214,6 +271,70 @@ public class RelatorioVendas extends javax.swing.JFrame {
     private void boxProcurarPorClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxProcurarPorClienteActionPerformed
         carregarVendasPorCliente();
     }//GEN-LAST:event_boxProcurarPorClienteActionPerformed
+
+    private void tabelaVendasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaVendasMouseClicked
+        DefaultTableModel tableModel = (DefaultTableModel)tabelaVendas.getModel();
+        int selectedRow = tabelaVendas.getSelectedRow();
+        labelNF.setText(tableModel.getValueAt(selectedRow, 0).toString());
+        if (tableModel.getValueAt(selectedRow, 4).equals("Processando")) {
+            boxEstado.setSelectedIndex(0);
+        }else if (tableModel.getValueAt(selectedRow, 4).equals("Finalizada")){
+            boxEstado.setSelectedIndex(1);
+        }else{
+            boxEstado.setSelectedIndex(2);
+        }
+      
+        
+        botaoMudar.setEnabled(true);
+
+    }//GEN-LAST:event_tabelaVendasMouseClicked
+
+    private void botaoMudarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMudarActionPerformed
+        try {
+            CompraDAO compraDAO = new CompraDAO();
+            if (compraDAO.updateCompraEstado(Integer.parseInt(labelNF.getText()), boxEstado.getSelectedItem()+"")){
+                JOptionPane.showMessageDialog(null, "Estado atualizado");
+                carregarVendas();
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ManterVendas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_botaoMudarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        carregarVendasPorCliente();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void botaoMudar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoMudar1ActionPerformed
+        try {
+            CompraDAO compraDAO = new CompraDAO();
+            if (compraDAO.updateCompraEstado(Integer.parseInt(labelNF1.getText()), boxEstado1.getSelectedItem()+"")){
+                JOptionPane.showMessageDialog(null, "Estado atualizado");
+                carregarVendasPorCliente();
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ManterVendas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_botaoMudar1ActionPerformed
+
+    private void tabelaVendasPorClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaVendasPorClienteMouseClicked
+        DefaultTableModel tableModel = (DefaultTableModel)tabelaVendasPorCliente.getModel();
+        int selectedRow = tabelaVendasPorCliente.getSelectedRow();
+        labelNF1.setText(tableModel.getValueAt(selectedRow, 0).toString());
+        if (tableModel.getValueAt(selectedRow, 4).equals("Processando")) {
+            boxEstado1.setSelectedIndex(0);
+        }else if (tableModel.getValueAt(selectedRow, 4).equals("Finalizada")){
+            boxEstado1.setSelectedIndex(1);
+        }else{
+            boxEstado1.setSelectedIndex(2);
+        }
+      
+        
+        botaoMudar1.setEnabled(true);
+    }//GEN-LAST:event_tabelaVendasPorClienteMouseClicked
 
     /**
      * @param args the command line arguments
@@ -232,50 +353,57 @@ public class RelatorioVendas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RelatorioVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManterVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RelatorioVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManterVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RelatorioVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManterVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RelatorioVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManterVendas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RelatorioVendas().setVisible(true);
+                new ManterVendas().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoMudar;
+    private javax.swing.JButton botaoMudar1;
+    private javax.swing.JComboBox<String> boxEstado;
+    private javax.swing.JComboBox<String> boxEstado1;
     private javax.swing.JComboBox<String> boxProcurar;
     private javax.swing.JComboBox<String> boxProcurarPorCliente;
+    private javax.swing.JFormattedTextField campoCPF;
     private javax.swing.JPanel header;
     private javax.swing.JPanel header1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JScrollPane jpanel;
-    private javax.swing.JLabel labelTotalFinal;
+    private javax.swing.JLabel labelNF;
+    private javax.swing.JLabel labelNF1;
+    private javax.swing.JLabel labelNumero;
+    private javax.swing.JLabel labelNumero1;
     private javax.swing.JPanel painelClientes;
     private javax.swing.JPanel painelTodas;
     private javax.swing.JTable tabelaVendas;
     private javax.swing.JTable tabelaVendasPorCliente;
-    private javax.swing.JTable tabelaVendasPorEstado;
     // End of variables declaration//GEN-END:variables
 
     private void carregarDados() {
         carregarVendas();
-        carregarVendasPorCliente();
-        carregarVendasPorEstado();
     }
     private void carregarVendas(){
         ((DefaultTableModel)tabelaVendas.getModel()).setRowCount(0);
@@ -308,83 +436,44 @@ public class RelatorioVendas extends javax.swing.JFrame {
                 tableModel.addRow(new Object[]{compra.getNotaFiscal(), compra.getDataCompra(), compra.getCliente().getNome(), "R$"+df.format(compra.getValorTotal()), compra.getEstado()});
                 totalFinal += compra.getValorTotal();
             }
-            if (totalFinal > 0)
-                labelTotalFinal.setText("Total (todas): R$" + df.format(totalFinal));
-            else
-                labelTotalFinal.setText("Nenhuma compra encontrada.");
+           
                 
             compraDAO.close();
         } catch (SQLException ex) {
-            Logger.getLogger(RelatorioVendas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManterVendas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     private void carregarVendasPorCliente(){
         ((DefaultTableModel)tabelaVendasPorCliente.getModel()).setRowCount(0);
         try {
             CompraDAO compraDAO = new CompraDAO();
-            List<DadosRelatorioCliente> compras = new ArrayList<>();
+            List<Compra> compras = new ArrayList<>();
             switch (boxProcurarPorCliente.getSelectedIndex()) {
                 case 1:
-                    compras = compraDAO.findComprasGroupByClienteNaoCancelada();
+                    compras = compraDAO.findCompraByCpf(campoCPF.getText(), "Processando");
                     break;
                 case 2:
-                    compras = compraDAO.findComprasGroupByCliente("Processamento");
+                    compras = compraDAO.findCompraByCpf(campoCPF.getText(), "Finalizada");
                     break;
                 case 3:
-                    compras = compraDAO.findComprasGroupByCliente("Finalizada");
-                    break;
-                case 4:
-                    compras = compraDAO.findComprasGroupByCliente("Cancelada");
+                    compras = compraDAO.findCompraByCpf(campoCPF.getText(), "Cancelada");
                     break;
                 default:
-                    compras = compraDAO.findComprasGroupByCliente("");;
+                    compras = compraDAO.findCompraByCpf(campoCPF.getText(), "");
             }
 
             DefaultTableModel tableModel = (DefaultTableModel)tabelaVendasPorCliente.getModel();
 
             DecimalFormat df = new DecimalFormat("#,###.##");
-            for (DadosRelatorioCliente compra:compras){
-                tableModel.addRow(new Object[]{"R$" + df.format(compra.getValortotal()), compra.getCliente().getNome(), compra.getCliente().getCpf() , compra.getCliente().getIdade()});
-                
+            for (Compra compra:compras){
+                tableModel.addRow(new Object[]{compra.getNotaFiscal(), compra.getDataCompra(), compra.getCliente().getNome(), "R$"+df.format(compra.getValorTotal()), compra.getEstado()});
             }
             
 
             compraDAO.close();
         } catch (SQLException ex) {
-            Logger.getLogger(RelatorioVendas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ManterVendas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    private void carregarVendasPorEstado(){
-        ((DefaultTableModel)tabelaVendasPorEstado.getModel()).setRowCount(0);
-        try {
-            CompraDAO compraDAO = new CompraDAO();
-            List<DadosRelatorioEstado> compras = new ArrayList<>();
-            compras = compraDAO.findComprasByEstado();
-            
-
-            DefaultTableModel tableModel = (DefaultTableModel)tabelaVendasPorEstado.getModel();
-
-            DecimalFormat df = new DecimalFormat("#,###.##");
-            double totalValor = 0.0;
-            int totalQuantidade = 0;
-            for (DadosRelatorioEstado compra:compras){
-                totalValor += compra.getValor();
-                totalQuantidade += compra.getQuantidade();
-            }
-            
-            for (DadosRelatorioEstado compra:compras){
-                tableModel.addRow(new Object[]{compra.getEstado(),
-                                               compra.getQuantidade(),
-                                               df.format((double)compra.getQuantidade()*100/totalQuantidade)+"%",
-                                               "R$" + df.format(compra.getValor()),
-                                               df.format(compra.getValor()*100/totalValor)+"%"});
-                
-            }
-            
-
-            compraDAO.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(RelatorioVendas.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
 }
